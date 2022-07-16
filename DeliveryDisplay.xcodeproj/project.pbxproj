@@ -19,6 +19,9 @@
 		065DD7C2288288F400AFE5D8 /* MyDeliveryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7C1288288F400AFE5D8 /* MyDeliveryViewModel.swift */; };
 		065DD7C42882890700AFE5D8 /* MyDeliveryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7C32882890700AFE5D8 /* MyDeliveryService.swift */; };
 		065DD7C728828C0B00AFE5D8 /* deliveries.json in Resources */ = {isa = PBXBuildFile; fileRef = 065DD7C628828C0B00AFE5D8 /* deliveries.json */; };
+		065DD7CA2882912D00AFE5D8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7C92882912D00AFE5D8 /* Constants.swift */; };
+		065DD7CD2882920000AFE5D8 /* MyDeliveryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7CC2882920000AFE5D8 /* MyDeliveryModel.swift */; };
+		065DD7D22882985E00AFE5D8 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7D12882985E00AFE5D8 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		065DD7C1288288F400AFE5D8 /* MyDeliveryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryViewModel.swift; sourceTree = "<group>"; };
 		065DD7C32882890700AFE5D8 /* MyDeliveryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryService.swift; sourceTree = "<group>"; };
 		065DD7C628828C0B00AFE5D8 /* deliveries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deliveries.json; sourceTree = "<group>"; };
+		065DD7C92882912D00AFE5D8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		065DD7CC2882920000AFE5D8 /* MyDeliveryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryModel.swift; sourceTree = "<group>"; };
+		065DD7D12882985E00AFE5D8 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,8 @@
 		065DD78828826C0600AFE5D8 /* DeliveryDisplay */ = {
 			isa = PBXGroup;
 			children = (
+				065DD7D02882984100AFE5D8 /* Network */,
+				065DD7C82882910B00AFE5D8 /* Utilities */,
 				065DD7C528828BFB00AFE5D8 /* JSON */,
 				065DD7BC2882887B00AFE5D8 /* MyDelivery */,
 				065DD78928826C0600AFE5D8 /* AppDelegate.swift */,
@@ -137,6 +145,7 @@
 		065DD7BC2882887B00AFE5D8 /* MyDelivery */ = {
 			isa = PBXGroup;
 			children = (
+				065DD7CB288291EE00AFE5D8 /* Model */,
 				065DD7BF288288C700AFE5D8 /* Service */,
 				065DD7BE2882889900AFE5D8 /* ViewModel */,
 				065DD7BD2882888D00AFE5D8 /* ViewController */,
@@ -174,6 +183,30 @@
 				065DD7C628828C0B00AFE5D8 /* deliveries.json */,
 			);
 			path = JSON;
+			sourceTree = "<group>";
+		};
+		065DD7C82882910B00AFE5D8 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				065DD7C92882912D00AFE5D8 /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		065DD7CB288291EE00AFE5D8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				065DD7CC2882920000AFE5D8 /* MyDeliveryModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		065DD7D02882984100AFE5D8 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				065DD7D12882985E00AFE5D8 /* NetworkService.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,10 +340,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				065DD7D22882985E00AFE5D8 /* NetworkService.swift in Sources */,
 				065DD78E28826C0600AFE5D8 /* MyDeliveryViewController.swift in Sources */,
 				065DD7C42882890700AFE5D8 /* MyDeliveryService.swift in Sources */,
 				065DD78A28826C0600AFE5D8 /* AppDelegate.swift in Sources */,
+				065DD7CD2882920000AFE5D8 /* MyDeliveryModel.swift in Sources */,
 				065DD79428826C0600AFE5D8 /* DeliveryDisplay.xcdatamodeld in Sources */,
+				065DD7CA2882912D00AFE5D8 /* Constants.swift in Sources */,
 				065DD7C2288288F400AFE5D8 /* MyDeliveryViewModel.swift in Sources */,
 				065DD78C28826C0600AFE5D8 /* SceneDelegate.swift in Sources */,
 			);

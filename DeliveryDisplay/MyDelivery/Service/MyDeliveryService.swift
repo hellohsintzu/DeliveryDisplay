@@ -8,13 +8,15 @@
 import Foundation
 
 protocol MyDeliveryServiceProtocol {
-    func fetchListOfDeliveries()
+    func fetchListOfDeliveries(urlString: String, completionHandler: @escaping (Result<DeliveryDetails, ErrorModel>) -> Void)
 }
 
 final class MyDeliveryService: MyDeliveryServiceProtocol {
-    func fetchListOfDeliveries() {
+    func fetchListOfDeliveries(urlString: String, completionHandler: @escaping (Result<DeliveryDetails, ErrorModel>) -> Void) {
+        guard let url = URL(string: urlString) else {
+            completionHandler(.failure(.invalidURL))
+            return
+        }
         
     }
-    
-    
 }
