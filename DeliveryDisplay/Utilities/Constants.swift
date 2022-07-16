@@ -17,6 +17,8 @@ struct Constants {
     
     struct MyDelivery {
         static let myDeliveryTitle =  "My Deliveries"
+        static let alertBtnTitle = "Got it"
+        static let alertTitle = "Oops...something went wrong"
     }
     
     struct DeliveryDetail {

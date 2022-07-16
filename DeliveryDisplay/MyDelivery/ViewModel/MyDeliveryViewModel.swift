@@ -10,9 +10,10 @@ import Foundation
 protocol MyDeliveryViewModelProtocol {
     // TableView
     var numberOfRows: Int { get }
+    func cellAt(_ indexPath: IndexPath) -> DeliveryDetails?
     
     // API call
-    func fetchDeliveryList(completionHandler: @escaping () -> Void)
+    func fetchDeliveryList(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void)
 }
 
 final class MyDeliveryViewModel {
@@ -27,17 +28,21 @@ final class MyDeliveryViewModel {
 
 extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
     var numberOfRows: Int {
-        return 0
+        return self.deliveryData?.count ?? 0
     }
     
-    func fetchDeliveryList(completionHandler: @escaping () -> Void) {
+    func cellAt(_ indexPath: IndexPath) -> DeliveryDetails? {
+        return deliveryData?[indexPath.row]
+    }
+    
+    func fetchDeliveryList(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void) {
         service.fetchListOfDeliveries { [weak self] result in
             switch result {
             case .success(let data):
-                print(data)
                 self?.deliveryData = data
+                completionHandler(true, nil)
             case .failure(let error):
-                print(error)
+                completionHandler(false, error.localizedDescription)
             }
         }
     }

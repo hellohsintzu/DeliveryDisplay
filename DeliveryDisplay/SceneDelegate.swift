@@ -24,7 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let service = MyDeliveryService(networkClient: networkClient)
         let viewModel = MyDeliveryViewModel(service: service)
         let viewController = MyDeliveryViewController(viewModel: viewModel)
-        window?.rootViewController = viewController
+        let nav = UINavigationController(rootViewController: viewController)
+        window?.rootViewController = nav
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
