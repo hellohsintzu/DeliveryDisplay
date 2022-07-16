@@ -16,44 +16,38 @@ enum ErrorModel: Error {
 }
 
 protocol NetworkServiceProtocol {
-    func request<T: Decodable>(urlString: String, requestParams: [String: Any]?, model: T.Type, handler: @escaping (Result<T, ErrorModel>) -> Void)
+    func request<T: Decodable>(urlString: String, requestParams: [String: Any]?, model: T.Type, completionHandler: @escaping (Result<T, ErrorModel>) -> Void)
 }
 
 final class NetworkService: NetworkServiceProtocol {
-    func request<T: Decodable>(urlString: String, requestParams: [String: Any]?, model: T.Type, handler: @escaping (Result<T, ErrorModel>) -> Void) {
+    func request<T: Decodable>(urlString: String, requestParams: [String: Any]?, model: T.Type, completionHandler: @escaping (Result<T, ErrorModel>) -> Void) {
         guard let url = URL(string: urlString) else {
-            handler(.failure(.invalidURL))
+            completionHandler(.failure(.invalidURL))
             return
         }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        do {
-            let bodyData = try JSONSerialization.data(withJSONObject: requestParams ?? [:], options: [])
-            request.httpBody = bodyData
-        } catch {
-            handler(.failure(.invalidData))
-        }
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                handler(.failure(.requestFail(error)))
+                completionHandler(.failure(.requestFail(error)))
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse,
                   httpResponse.statusCode == 200 else {
-                      handler(.failure(.invalidResponse))
+                      completionHandler(.failure(.invalidResponse))
                       return
                   }
             guard let data = data else {
-                handler(.failure(.invalidData))
+                completionHandler(.failure(.invalidData))
                 return
             }
             do {
                 let decodedData = try JSONDecoder().decode(model.self, from: data)
-                handler(.success(decodedData))
+                completionHandler(.success(decodedData))
             } catch {
-                handler(.failure(.invalidJSON))
+                completionHandler(.failure(.invalidJSON))
             }
         }
         task.resume()

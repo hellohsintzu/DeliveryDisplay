@@ -10,7 +10,7 @@ import Foundation
 struct DeliveryDetails: Codable {
     var id: String?
     var remarks: String?
-    var pickupTime: Date?
+    var pickupTime: String?
     var goodsPicture: String?
     var deliveryFee: String?
     var surcharge: String?
