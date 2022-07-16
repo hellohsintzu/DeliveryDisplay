@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MyDeliveryViewController.swift
 //  DeliveryDisplay
 //
 //  Created by 顏莘慈 on 2022/7/16.
@@ -7,7 +7,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class MyDeliveryViewController: UIViewController {
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

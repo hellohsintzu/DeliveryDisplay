@@ -9,14 +9,16 @@
 /* Begin PBXBuildFile section */
 		065DD78A28826C0600AFE5D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD78928826C0600AFE5D8 /* AppDelegate.swift */; };
 		065DD78C28826C0600AFE5D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD78B28826C0600AFE5D8 /* SceneDelegate.swift */; };
-		065DD78E28826C0600AFE5D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD78D28826C0600AFE5D8 /* ViewController.swift */; };
-		065DD79128826C0600AFE5D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 065DD78F28826C0600AFE5D8 /* Main.storyboard */; };
+		065DD78E28826C0600AFE5D8 /* MyDeliveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD78D28826C0600AFE5D8 /* MyDeliveryViewController.swift */; };
 		065DD79428826C0600AFE5D8 /* DeliveryDisplay.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 065DD79228826C0600AFE5D8 /* DeliveryDisplay.xcdatamodeld */; };
 		065DD79628826C0800AFE5D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065DD79528826C0800AFE5D8 /* Assets.xcassets */; };
 		065DD79928826C0800AFE5D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 065DD79728826C0800AFE5D8 /* LaunchScreen.storyboard */; };
 		065DD7A428826C0900AFE5D8 /* DeliveryDisplayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7A328826C0900AFE5D8 /* DeliveryDisplayTests.swift */; };
 		065DD7AE28826C0900AFE5D8 /* DeliveryDisplayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7AD28826C0900AFE5D8 /* DeliveryDisplayUITests.swift */; };
 		065DD7B028826C0900AFE5D8 /* DeliveryDisplayUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7AF28826C0900AFE5D8 /* DeliveryDisplayUITestsLaunchTests.swift */; };
+		065DD7C2288288F400AFE5D8 /* MyDeliveryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7C1288288F400AFE5D8 /* MyDeliveryViewModel.swift */; };
+		065DD7C42882890700AFE5D8 /* MyDeliveryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7C32882890700AFE5D8 /* MyDeliveryService.swift */; };
+		065DD7C728828C0B00AFE5D8 /* deliveries.json in Resources */ = {isa = PBXBuildFile; fileRef = 065DD7C628828C0B00AFE5D8 /* deliveries.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +42,7 @@
 		065DD78628826C0600AFE5D8 /* DeliveryDisplay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeliveryDisplay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065DD78928826C0600AFE5D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		065DD78B28826C0600AFE5D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		065DD78D28826C0600AFE5D8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		065DD79028826C0600AFE5D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		065DD78D28826C0600AFE5D8 /* MyDeliveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryViewController.swift; sourceTree = "<group>"; };
 		065DD79328826C0600AFE5D8 /* DeliveryDisplay.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DeliveryDisplay.xcdatamodel; sourceTree = "<group>"; };
 		065DD79528826C0800AFE5D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		065DD79828826C0800AFE5D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +52,9 @@
 		065DD7A928826C0900AFE5D8 /* DeliveryDisplayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeliveryDisplayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		065DD7AD28826C0900AFE5D8 /* DeliveryDisplayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryDisplayUITests.swift; sourceTree = "<group>"; };
 		065DD7AF28826C0900AFE5D8 /* DeliveryDisplayUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryDisplayUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		065DD7C1288288F400AFE5D8 /* MyDeliveryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryViewModel.swift; sourceTree = "<group>"; };
+		065DD7C32882890700AFE5D8 /* MyDeliveryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryService.swift; sourceTree = "<group>"; };
+		065DD7C628828C0B00AFE5D8 /* deliveries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deliveries.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +105,10 @@
 		065DD78828826C0600AFE5D8 /* DeliveryDisplay */ = {
 			isa = PBXGroup;
 			children = (
+				065DD7C528828BFB00AFE5D8 /* JSON */,
+				065DD7BC2882887B00AFE5D8 /* MyDelivery */,
 				065DD78928826C0600AFE5D8 /* AppDelegate.swift */,
 				065DD78B28826C0600AFE5D8 /* SceneDelegate.swift */,
-				065DD78D28826C0600AFE5D8 /* ViewController.swift */,
-				065DD78F28826C0600AFE5D8 /* Main.storyboard */,
 				065DD79528826C0800AFE5D8 /* Assets.xcassets */,
 				065DD79728826C0800AFE5D8 /* LaunchScreen.storyboard */,
 				065DD79A28826C0800AFE5D8 /* Info.plist */,
@@ -128,6 +132,48 @@
 				065DD7AF28826C0900AFE5D8 /* DeliveryDisplayUITestsLaunchTests.swift */,
 			);
 			path = DeliveryDisplayUITests;
+			sourceTree = "<group>";
+		};
+		065DD7BC2882887B00AFE5D8 /* MyDelivery */ = {
+			isa = PBXGroup;
+			children = (
+				065DD7BF288288C700AFE5D8 /* Service */,
+				065DD7BE2882889900AFE5D8 /* ViewModel */,
+				065DD7BD2882888D00AFE5D8 /* ViewController */,
+			);
+			path = MyDelivery;
+			sourceTree = "<group>";
+		};
+		065DD7BD2882888D00AFE5D8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				065DD78D28826C0600AFE5D8 /* MyDeliveryViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		065DD7BE2882889900AFE5D8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				065DD7C1288288F400AFE5D8 /* MyDeliveryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		065DD7BF288288C700AFE5D8 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				065DD7C32882890700AFE5D8 /* MyDeliveryService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		065DD7C528828BFB00AFE5D8 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				065DD7C628828C0B00AFE5D8 /* deliveries.json */,
+			);
+			path = JSON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,9 +280,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				065DD7C728828C0B00AFE5D8 /* deliveries.json in Resources */,
 				065DD79928826C0800AFE5D8 /* LaunchScreen.storyboard in Resources */,
 				065DD79628826C0800AFE5D8 /* Assets.xcassets in Resources */,
-				065DD79128826C0600AFE5D8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,9 +307,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				065DD78E28826C0600AFE5D8 /* ViewController.swift in Sources */,
+				065DD78E28826C0600AFE5D8 /* MyDeliveryViewController.swift in Sources */,
+				065DD7C42882890700AFE5D8 /* MyDeliveryService.swift in Sources */,
 				065DD78A28826C0600AFE5D8 /* AppDelegate.swift in Sources */,
 				065DD79428826C0600AFE5D8 /* DeliveryDisplay.xcdatamodeld in Sources */,
+				065DD7C2288288F400AFE5D8 /* MyDeliveryViewModel.swift in Sources */,
 				065DD78C28826C0600AFE5D8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,14 +349,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		065DD78F28826C0600AFE5D8 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				065DD79028826C0600AFE5D8 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		065DD79728826C0800AFE5D8 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -448,9 +488,9 @@
 				INFOPLIST_FILE = DeliveryDisplay/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -476,9 +516,9 @@
 				INFOPLIST_FILE = DeliveryDisplay/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
