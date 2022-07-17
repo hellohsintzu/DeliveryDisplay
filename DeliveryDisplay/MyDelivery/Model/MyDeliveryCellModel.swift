@@ -12,11 +12,13 @@ struct MyDeliveryCellModel {
     var receiverTitle: String
     var feeTitle: String
     var imageURLString: String
+    var isFavorite: Bool
     
-    init(senderTitle: String, receiverTitle: String, feeTitle: String, imageURLString: String) {
+    init(senderTitle: String, receiverTitle: String, feeTitle: String, imageURLString: String, isFavorite: Bool) {
         self.senderTitle = senderTitle
         self.receiverTitle = receiverTitle
         self.feeTitle = feeTitle
         self.imageURLString = imageURLString
+        self.isFavorite = isFavorite
     }
 }

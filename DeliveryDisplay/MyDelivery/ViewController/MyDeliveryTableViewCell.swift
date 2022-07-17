@@ -38,6 +38,14 @@ final class MyDeliveryTableViewCell: UITableViewCell {
         return label
     }()
     
+    private let favoriteIndicator: UIImageView = {
+        let imageView = UIImageView()
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.tintColor = .orange
+        return imageView
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupContentView()
@@ -62,6 +70,7 @@ final class MyDeliveryTableViewCell: UITableViewCell {
         receiverLabel.text = "\(Constants.MyDelivery.receiverLabel)\(cModel.receiverTitle)"
         feeLabel.text = "\(Constants.MyDelivery.feeLabel)\(cModel.feeTitle)"
         cellImageView.load(url: URL(string: cModel.imageURLString))
+        favoriteIndicator.image = cModel.isFavorite ? UIImage(systemName: "heart.fill") : nil
     }
 }
 
@@ -71,6 +80,7 @@ private extension MyDeliveryTableViewCell {
         contentView.addSubview(senderLabel)
         contentView.addSubview(receiverLabel)
         contentView.addSubview(feeLabel)
+        contentView.addSubview(favoriteIndicator)
     }
     
     func setupFrames() {
@@ -79,6 +89,7 @@ private extension MyDeliveryTableViewCell {
         senderLabel.frame = CGRect(x: 10, y: 10, width: contentView.frame.size.width/2, height: contentView.frame.size.height/2)
         receiverLabel.frame = CGRect(x: 10, y: 35, width: contentView.frame.size.width/2, height: contentView.frame.size.height/2)
         feeLabel.frame = CGRect(x: contentView.frame.size.width/2, y: 35, width: contentView.frame.size.width, height: contentView.frame.size.height/2)
+        favoriteIndicator.frame = CGRect(x: contentView.frame.size.width/2, y: 10, width: 20, height: 20)
     }
     
     func setValuesNil() {

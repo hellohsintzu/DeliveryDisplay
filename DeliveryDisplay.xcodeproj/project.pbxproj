@@ -25,6 +25,9 @@
 		0671E9102882ECAF003190D9 /* MyDeliveryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E90F2882ECAF003190D9 /* MyDeliveryTableViewCell.swift */; };
 		0671E9122882F3DF003190D9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E9112882F3DF003190D9 /* Extension.swift */; };
 		0671E9142883AB60003190D9 /* MyDeliveryCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E9132883AB60003190D9 /* MyDeliveryCellModel.swift */; };
+		0671E9192883BC65003190D9 /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E9182883BC65003190D9 /* DeliveryDetailViewController.swift */; };
+		0671E91B2883BC87003190D9 /* DeliveryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E91A2883BC87003190D9 /* DeliveryDetailViewModel.swift */; };
+		0671E91E2883C115003190D9 /* MyDeliveryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E91D2883C115003190D9 /* MyDeliveryRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,9 @@
 		0671E90F2882ECAF003190D9 /* MyDeliveryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryTableViewCell.swift; sourceTree = "<group>"; };
 		0671E9112882F3DF003190D9 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		0671E9132883AB60003190D9 /* MyDeliveryCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryCellModel.swift; sourceTree = "<group>"; };
+		0671E9182883BC65003190D9 /* DeliveryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryDetailViewController.swift; sourceTree = "<group>"; };
+		0671E91A2883BC87003190D9 /* DeliveryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryDetailViewModel.swift; sourceTree = "<group>"; };
+		0671E91D2883C115003190D9 /* MyDeliveryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +126,7 @@
 				065DD7D02882984100AFE5D8 /* Network */,
 				065DD7C82882910B00AFE5D8 /* Utilities */,
 				065DD7C528828BFB00AFE5D8 /* JSON */,
+				0671E9152883BC21003190D9 /* DeliveryDetail */,
 				065DD7BC2882887B00AFE5D8 /* MyDelivery */,
 				065DD78928826C0600AFE5D8 /* AppDelegate.swift */,
 				065DD78B28826C0600AFE5D8 /* SceneDelegate.swift */,
@@ -153,6 +160,7 @@
 			children = (
 				065DD7CB288291EE00AFE5D8 /* Model */,
 				065DD7BF288288C700AFE5D8 /* Service */,
+				0671E91C2883C100003190D9 /* Router */,
 				065DD7BE2882889900AFE5D8 /* ViewModel */,
 				065DD7BD2882888D00AFE5D8 /* ViewController */,
 			);
@@ -216,6 +224,39 @@
 				065DD7D12882985E00AFE5D8 /* NetworkService.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		0671E9152883BC21003190D9 /* DeliveryDetail */ = {
+			isa = PBXGroup;
+			children = (
+				0671E9172883BC3E003190D9 /* ViewController */,
+				0671E9162883BC38003190D9 /* ViewModel */,
+			);
+			path = DeliveryDetail;
+			sourceTree = "<group>";
+		};
+		0671E9162883BC38003190D9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0671E91A2883BC87003190D9 /* DeliveryDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0671E9172883BC3E003190D9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0671E9182883BC65003190D9 /* DeliveryDetailViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0671E91C2883C100003190D9 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				0671E91D2883C115003190D9 /* MyDeliveryRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -350,10 +391,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				065DD7D22882985E00AFE5D8 /* NetworkService.swift in Sources */,
+				0671E91B2883BC87003190D9 /* DeliveryDetailViewModel.swift in Sources */,
 				065DD78E28826C0600AFE5D8 /* MyDeliveryViewController.swift in Sources */,
 				065DD7C42882890700AFE5D8 /* MyDeliveryService.swift in Sources */,
+				0671E9192883BC65003190D9 /* DeliveryDetailViewController.swift in Sources */,
 				065DD78A28826C0600AFE5D8 /* AppDelegate.swift in Sources */,
 				0671E9122882F3DF003190D9 /* Extension.swift in Sources */,
+				0671E91E2883C115003190D9 /* MyDeliveryRouter.swift in Sources */,
 				065DD7CD2882920000AFE5D8 /* MyDeliveryModel.swift in Sources */,
 				0671E9102882ECAF003190D9 /* MyDeliveryTableViewCell.swift in Sources */,
 				0671E9142883AB60003190D9 /* MyDeliveryCellModel.swift in Sources */,

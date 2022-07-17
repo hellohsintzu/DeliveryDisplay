@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MyDeliveryViewModelProtocol {
     // TableView
@@ -14,16 +15,20 @@ protocol MyDeliveryViewModelProtocol {
     
     // API call
     func fetchDeliveryList(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void)
+    
+    // redirection
+    func redirectToDeliveryDetail(nav: UINavigationController)
 }
 
 final class MyDeliveryViewModel {
     private let service: MyDeliveryServiceProtocol
+    private let router: MyDeliveryRouterProtocol
     private var deliveryData: [DeliveryDetails]?
     
-    init(service: MyDeliveryServiceProtocol) {
+    init(service: MyDeliveryServiceProtocol, router: MyDeliveryRouterProtocol) {
         self.service = service
+        self.router = router
     }
-    
 }
 
 extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
@@ -35,7 +40,8 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
         let cModel = MyDeliveryCellModel(senderTitle: self.deliveryData?[indexPath.row].route?.start ?? "",
                                          receiverTitle: self.deliveryData?[indexPath.row].route?.end ?? "",
                                          feeTitle: self.generateDeliveryFee(indexPath),
-                                         imageURLString: self.deliveryData?[indexPath.row].goodsPicture ?? "")
+                                         imageURLString: self.deliveryData?[indexPath.row].goodsPicture ?? "",
+                                         isFavorite: false)
         return cModel
     }
     
@@ -49,6 +55,10 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
                 completionHandler(false, error.localizedDescription)
             }
         }
+    }
+    
+    func redirectToDeliveryDetail(nav: UINavigationController) {
+        router.redirectToDeliveryDetail(nav: nav)
     }
 }
 

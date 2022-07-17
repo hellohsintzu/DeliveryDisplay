@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         let networkClient = NetworkService()
         let service = MyDeliveryService(networkClient: networkClient)
-        let viewModel = MyDeliveryViewModel(service: service)
+        let router = MyDeliveryRouter()
+        let viewModel = MyDeliveryViewModel(service: service, router: router)
         let viewController = MyDeliveryViewController(viewModel: viewModel)
         let nav = UINavigationController(rootViewController: viewController)
         window?.rootViewController = nav

@@ -35,6 +35,11 @@ final class MyDeliveryViewController: UIViewController {
             }
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
 }
 
 extension MyDeliveryViewController: UITableViewDelegate, UITableViewDataSource {
@@ -52,6 +57,10 @@ extension MyDeliveryViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.redirectToDeliveryDetail(nav: self.navigationController ?? UINavigationController())
     }
 }
 
