@@ -26,5 +26,8 @@ struct Constants {
     
     struct DeliveryDetail {
         static let deliveryDetailsTitle = "Delivery Details"
+        static let favBtnTitle = "Add to Favorite"
+        static let goodsTitle = "Goods to deliver"
+        static let feeTitle = "Delivery Fee"
     }
 }

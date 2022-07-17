@@ -66,7 +66,7 @@ final class MyDeliveryTableViewCell: UITableViewCell {
         self.setValuesNil()
     }
     
-    func configure(_ cModel: MyDeliveryCellModel) {
+    func configure(_ cModel: MyDeliveryModel) {
         senderLabel.text = "\(Constants.MyDelivery.senderLabel)\(cModel.senderTitle)"
         receiverLabel.text = "\(Constants.MyDelivery.receiverLabel)\(cModel.receiverTitle)"
         feeLabel.text = "\(Constants.MyDelivery.feeLabel)\(cModel.feeTitle)"

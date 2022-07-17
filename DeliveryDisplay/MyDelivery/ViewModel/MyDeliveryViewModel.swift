@@ -11,13 +11,13 @@ import UIKit
 protocol MyDeliveryViewModelProtocol {
     // TableView
     var numberOfRows: Int { get }
-    func cellAt(_ indexPath: IndexPath) -> MyDeliveryCellModel
+    func cellAt(_ indexPath: IndexPath) -> MyDeliveryModel
     
     // API call
     func fetchDeliveryList(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void)
     
     // redirection
-    func redirectToDeliveryDetail(nav: UINavigationController)
+    func redirectToDeliveryDetail(nav: UINavigationController, model: MyDeliveryModel)
 }
 
 final class MyDeliveryViewModel {
@@ -36,8 +36,8 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
         return self.deliveryData?.count ?? 0
     }
     
-    func cellAt(_ indexPath: IndexPath) -> MyDeliveryCellModel {
-        let cModel = MyDeliveryCellModel(senderTitle: self.deliveryData?[indexPath.row].route?.start ?? "",
+    func cellAt(_ indexPath: IndexPath) -> MyDeliveryModel {
+        let cModel = MyDeliveryModel(senderTitle: self.deliveryData?[indexPath.row].route?.start ?? "",
                                          receiverTitle: self.deliveryData?[indexPath.row].route?.end ?? "",
                                          feeTitle: self.generateDeliveryFee(indexPath),
                                          imageURLString: self.deliveryData?[indexPath.row].goodsPicture ?? "",
@@ -57,8 +57,8 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
         }
     }
     
-    func redirectToDeliveryDetail(nav: UINavigationController) {
-        router.redirectToDeliveryDetail(nav: nav)
+    func redirectToDeliveryDetail(nav: UINavigationController, model: MyDeliveryModel) {
+        router.redirectToDeliveryDetail(nav: nav, model: model)
     }
 }
 

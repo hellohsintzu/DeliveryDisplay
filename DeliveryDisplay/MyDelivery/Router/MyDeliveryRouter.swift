@@ -9,13 +9,14 @@ import Foundation
 import UIKit
 
 protocol MyDeliveryRouterProtocol {
-    func redirectToDeliveryDetail(nav: UINavigationController)
+    func redirectToDeliveryDetail(nav: UINavigationController, model: MyDeliveryModel)
 }
 
 final class MyDeliveryRouter: MyDeliveryRouterProtocol {
-    func redirectToDeliveryDetail(nav: UINavigationController) {
-        let viewModel = DeliveryDetailViewModel()
+    func redirectToDeliveryDetail(nav: UINavigationController, model: MyDeliveryModel) {
+        let viewModel = DeliveryDetailViewModel(model: model)
         let viewController = DeliveryDetailViewController(viewModel: viewModel)
+        viewController.title = Constants.DeliveryDetail.deliveryDetailsTitle
         nav.pushViewController(viewController, animated: true)
     }
 }

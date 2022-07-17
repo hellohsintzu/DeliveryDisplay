@@ -60,7 +60,8 @@ extension MyDeliveryViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.redirectToDeliveryDetail(nav: self.navigationController ?? UINavigationController())
+        viewModel.redirectToDeliveryDetail(nav: self.navigationController ?? UINavigationController(),
+                                           model: viewModel.cellAt(indexPath))
     }
 }
 

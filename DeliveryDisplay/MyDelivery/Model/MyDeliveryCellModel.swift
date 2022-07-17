@@ -1,5 +1,5 @@
 //
-//  MyDeliveryCellModel.swift
+//  MyDeliveryModel.swift
 //  DeliveryDisplay
 //
 //  Created by 顏莘慈 on 2022/7/17.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MyDeliveryCellModel {
+struct MyDeliveryModel {
     var senderTitle: String
     var receiverTitle: String
     var feeTitle: String
