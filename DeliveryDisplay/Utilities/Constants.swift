@@ -19,6 +19,9 @@ struct Constants {
         static let myDeliveryTitle =  "My Deliveries"
         static let alertBtnTitle = "Got it"
         static let alertTitle = "Oops...something went wrong"
+        static let senderLabel = "From: "
+        static let receiverLabel = "To: "
+        static let feeLabel = "$"
     }
     
     struct DeliveryDetail {

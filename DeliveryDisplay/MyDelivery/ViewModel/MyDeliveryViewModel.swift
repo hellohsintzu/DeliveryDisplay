@@ -10,7 +10,7 @@ import Foundation
 protocol MyDeliveryViewModelProtocol {
     // TableView
     var numberOfRows: Int { get }
-    func cellAt(_ indexPath: IndexPath) -> DeliveryDetails?
+    func cellAt(_ indexPath: IndexPath) -> MyDeliveryCellModel
     
     // API call
     func fetchDeliveryList(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void)
@@ -31,8 +31,12 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
         return self.deliveryData?.count ?? 0
     }
     
-    func cellAt(_ indexPath: IndexPath) -> DeliveryDetails? {
-        return deliveryData?[indexPath.row]
+    func cellAt(_ indexPath: IndexPath) -> MyDeliveryCellModel {
+        let cModel = MyDeliveryCellModel(senderTitle: self.deliveryData?[indexPath.row].route?.start ?? "",
+                                         receiverTitle: self.deliveryData?[indexPath.row].route?.end ?? "",
+                                         feeTitle: self.generateDeliveryFee(indexPath),
+                                         imageURLString: self.deliveryData?[indexPath.row].goodsPicture ?? "")
+        return cModel
     }
     
     func fetchDeliveryList(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void) {
@@ -45,5 +49,18 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
                 completionHandler(false, error.localizedDescription)
             }
         }
+    }
+}
+
+private extension MyDeliveryViewModel {
+    func generateDeliveryFee(_ indexPath: IndexPath) -> String {
+        guard var deliveryFee = self.deliveryData?[indexPath.row].deliveryFee,
+              var surcharge = self.deliveryData?[indexPath.row].surcharge else { return "" }
+        deliveryFee.removeFirst()
+        surcharge.removeFirst()
+        let deliveryFeeFloat = Float(deliveryFee) ?? 0.0
+        let surchargeFloat = Float(surcharge) ?? 0.0
+        let fee = deliveryFeeFloat + surchargeFloat
+        return String(format: "%.2f", fee)
     }
 }

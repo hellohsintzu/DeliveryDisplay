@@ -35,8 +35,6 @@ final class MyDeliveryViewController: UIViewController {
             }
         }
     }
-    
-    
 }
 
 extension MyDeliveryViewController: UITableViewDelegate, UITableViewDataSource {
@@ -49,13 +47,10 @@ extension MyDeliveryViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: MyDeliveryTableViewCell.identifier, for: indexPath) as? MyDeliveryTableViewCell,
-           let cModel = viewModel.cellAt(indexPath) {
-            cell.configure(cModel)
-            
+        if let cell = tableView.dequeueReusableCell(withIdentifier: MyDeliveryTableViewCell.identifier, for: indexPath) as? MyDeliveryTableViewCell {
+            cell.configure(viewModel.cellAt(indexPath))
             return cell
         }
-        
         return UITableViewCell()
     }
 }

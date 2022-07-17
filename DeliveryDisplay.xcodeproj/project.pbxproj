@@ -24,6 +24,7 @@
 		065DD7D22882985E00AFE5D8 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7D12882985E00AFE5D8 /* NetworkService.swift */; };
 		0671E9102882ECAF003190D9 /* MyDeliveryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E90F2882ECAF003190D9 /* MyDeliveryTableViewCell.swift */; };
 		0671E9122882F3DF003190D9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E9112882F3DF003190D9 /* Extension.swift */; };
+		0671E9142883AB60003190D9 /* MyDeliveryCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E9132883AB60003190D9 /* MyDeliveryCellModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		065DD7D12882985E00AFE5D8 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		0671E90F2882ECAF003190D9 /* MyDeliveryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryTableViewCell.swift; sourceTree = "<group>"; };
 		0671E9112882F3DF003190D9 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		0671E9132883AB60003190D9 /* MyDeliveryCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryCellModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				065DD7CC2882920000AFE5D8 /* MyDeliveryModel.swift */,
+				0671E9132883AB60003190D9 /* MyDeliveryCellModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				0671E9122882F3DF003190D9 /* Extension.swift in Sources */,
 				065DD7CD2882920000AFE5D8 /* MyDeliveryModel.swift in Sources */,
 				0671E9102882ECAF003190D9 /* MyDeliveryTableViewCell.swift in Sources */,
+				0671E9142883AB60003190D9 /* MyDeliveryCellModel.swift in Sources */,
 				065DD79428826C0600AFE5D8 /* DeliveryDisplay.xcdatamodeld in Sources */,
 				065DD7CA2882912D00AFE5D8 /* Constants.swift in Sources */,
 				065DD7C2288288F400AFE5D8 /* MyDeliveryViewModel.swift in Sources */,
