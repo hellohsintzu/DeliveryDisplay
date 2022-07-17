@@ -9,7 +9,7 @@ import Foundation
 
 struct Constants {
     struct APIConstants {
-        static let urlString = "6285f87796bccbf32d6c0e6a.mockapi.io"
+        static let urlString = "https://6285f87796bccbf32d6c0e6a.mockapi.io"
         static let endpoint = "/deliveries"
         static let offset = "offset"
         static let limit = "limit"

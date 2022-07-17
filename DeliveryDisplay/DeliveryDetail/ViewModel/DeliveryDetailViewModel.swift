@@ -13,12 +13,15 @@ protocol DeliveryDetailViewModelProtocol {
     var imageURLString: String { get }
     var deliveryFeeString: String { get }
     var isFavorite: Bool { get set }
+    
+    func viewDidDisappear()
 }
 
 final class DeliveryDetailViewModel {
     private let deliveryDetail: MyDeliveryModel
     private let userDefaults = UserDefaults()
-
+    var didTapBackBtn: (() -> Void)?
+    
     init(model: MyDeliveryModel) {
         deliveryDetail = model
     }
@@ -52,5 +55,9 @@ extension DeliveryDetailViewModel: DeliveryDetailViewModelProtocol {
         set {
             userDefaults.setValue(newValue, forKey: deliveryDetail.id)
         }
+    }
+    
+    func viewDidDisappear() {
+        self.didTapBackBtn?()
     }
 }

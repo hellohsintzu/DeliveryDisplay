@@ -21,11 +21,9 @@ final class MyDeliveryService {
 
 extension MyDeliveryService: MyDeliveryServiceProtocol {
     func fetchListOfDeliveries(completionHandler: @escaping (Result<[DeliveryDetails], ErrorModel>) -> Void) {
-        let urlString = "https://\(Constants.APIConstants.urlString)\(Constants.APIConstants.endpoint)"
-        let params: [String: Any] = [Constants.APIConstants.offset: 0,
-                                     Constants.APIConstants.limit: 10]
+        let urlString = "\(Constants.APIConstants.urlString)\(Constants.APIConstants.endpoint)"
         
-        networkClient.request(urlString: urlString, requestParams: params, model: [DeliveryDetails].self) { result in
+        networkClient.request(urlString: urlString, model: [DeliveryDetails].self) { result in
             switch result {
             case .success(let data):
                 completionHandler(.success(data))

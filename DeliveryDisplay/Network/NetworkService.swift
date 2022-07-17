@@ -16,11 +16,11 @@ enum ErrorModel: Error {
 }
 
 protocol NetworkServiceProtocol {
-    func request<T: Decodable>(urlString: String, requestParams: [String: Any]?, model: T.Type, completionHandler: @escaping (Result<T, ErrorModel>) -> Void)
+    func request<T: Decodable>(urlString: String, model: T.Type, completionHandler: @escaping (Result<T, ErrorModel>) -> Void)
 }
 
 final class NetworkService: NetworkServiceProtocol {
-    func request<T: Decodable>(urlString: String, requestParams: [String: Any]?, model: T.Type, completionHandler: @escaping (Result<T, ErrorModel>) -> Void) {
+    func request<T: Decodable>(urlString: String, model: T.Type, completionHandler: @escaping (Result<T, ErrorModel>) -> Void) {
         guard let url = URL(string: urlString) else {
             completionHandler(.failure(.invalidURL))
             return

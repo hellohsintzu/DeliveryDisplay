@@ -25,9 +25,11 @@
 		0671E9142883AB60003190D9 /* MyDeliveryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E9132883AB60003190D9 /* MyDeliveryModel.swift */; };
 		0671E9192883BC65003190D9 /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E9182883BC65003190D9 /* DeliveryDetailViewController.swift */; };
 		0671E91B2883BC87003190D9 /* DeliveryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E91A2883BC87003190D9 /* DeliveryDetailViewModel.swift */; };
-		0671E91E2883C115003190D9 /* MyDeliveryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E91D2883C115003190D9 /* MyDeliveryRouter.swift */; };
 		0671E9212883CDB2003190D9 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0671E9202883CDB2003190D9 /* SDWebImage */; };
 		0671E9232883CDB2003190D9 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0671E9222883CDB2003190D9 /* SDWebImageMapKit */; };
+		0671E92F28843478003190D9 /* MyDeliveryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E92E28843478003190D9 /* MyDeliveryCoordinator.swift */; };
+		0671E931288439BC003190D9 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E930288439BC003190D9 /* AppCoordinator.swift */; };
+		0671E93828843DFF003190D9 /* DeliveryDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E93728843DFF003190D9 /* DeliveryDetailCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +72,9 @@
 		0671E9132883AB60003190D9 /* MyDeliveryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryModel.swift; sourceTree = "<group>"; };
 		0671E9182883BC65003190D9 /* DeliveryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryDetailViewController.swift; sourceTree = "<group>"; };
 		0671E91A2883BC87003190D9 /* DeliveryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryDetailViewModel.swift; sourceTree = "<group>"; };
-		0671E91D2883C115003190D9 /* MyDeliveryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryRouter.swift; sourceTree = "<group>"; };
+		0671E92E28843478003190D9 /* MyDeliveryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryCoordinator.swift; sourceTree = "<group>"; };
+		0671E930288439BC003190D9 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		0671E93728843DFF003190D9 /* DeliveryDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryDetailCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,7 @@
 		065DD78828826C0600AFE5D8 /* DeliveryDisplay */ = {
 			isa = PBXGroup;
 			children = (
+				0671E929288433CD003190D9 /* Coordinator */,
 				065DD7D02882984100AFE5D8 /* Network */,
 				065DD7C82882910B00AFE5D8 /* Utilities */,
 				065DD7C528828BFB00AFE5D8 /* JSON */,
@@ -159,7 +164,7 @@
 			children = (
 				065DD7CB288291EE00AFE5D8 /* Model */,
 				065DD7BF288288C700AFE5D8 /* Service */,
-				0671E91C2883C100003190D9 /* Router */,
+				0671E91C2883C100003190D9 /* Coordinator */,
 				065DD7BE2882889900AFE5D8 /* ViewModel */,
 				065DD7BD2882888D00AFE5D8 /* ViewController */,
 			);
@@ -227,6 +232,7 @@
 		0671E9152883BC21003190D9 /* DeliveryDetail */ = {
 			isa = PBXGroup;
 			children = (
+				0671E93228843DB3003190D9 /* Coordinator */,
 				0671E9172883BC3E003190D9 /* ViewController */,
 				0671E9162883BC38003190D9 /* ViewModel */,
 			);
@@ -249,12 +255,28 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		0671E91C2883C100003190D9 /* Router */ = {
+		0671E91C2883C100003190D9 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				0671E91D2883C115003190D9 /* MyDeliveryRouter.swift */,
+				0671E92E28843478003190D9 /* MyDeliveryCoordinator.swift */,
 			);
-			path = Router;
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		0671E929288433CD003190D9 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				0671E930288439BC003190D9 /* AppCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		0671E93228843DB3003190D9 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				0671E93728843DFF003190D9 /* DeliveryDetailCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,13 +417,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0671E93828843DFF003190D9 /* DeliveryDetailCoordinator.swift in Sources */,
 				065DD7D22882985E00AFE5D8 /* NetworkService.swift in Sources */,
 				0671E91B2883BC87003190D9 /* DeliveryDetailViewModel.swift in Sources */,
 				065DD78E28826C0600AFE5D8 /* MyDeliveryViewController.swift in Sources */,
 				065DD7C42882890700AFE5D8 /* MyDeliveryService.swift in Sources */,
+				0671E931288439BC003190D9 /* AppCoordinator.swift in Sources */,
+				0671E92F28843478003190D9 /* MyDeliveryCoordinator.swift in Sources */,
 				0671E9192883BC65003190D9 /* DeliveryDetailViewController.swift in Sources */,
 				065DD78A28826C0600AFE5D8 /* AppDelegate.swift in Sources */,
-				0671E91E2883C115003190D9 /* MyDeliveryRouter.swift in Sources */,
 				065DD7CD2882920000AFE5D8 /* DeliveryDetailsModel.swift in Sources */,
 				0671E9102882ECAF003190D9 /* MyDeliveryTableViewCell.swift in Sources */,
 				0671E9142883AB60003190D9 /* MyDeliveryModel.swift in Sources */,

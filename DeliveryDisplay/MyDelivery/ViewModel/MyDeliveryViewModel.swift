@@ -12,23 +12,20 @@ protocol MyDeliveryViewModelProtocol {
     // TableView
     var numberOfRows: Int { get }
     func cellAt(_ indexPath: IndexPath) -> MyDeliveryModel
+    func didSelectCell(at indexPath: IndexPath)
     
     // API call
     func fetchDeliveryList(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void)
-    
-    // redirection
-    func redirectToDeliveryDetail(nav: UINavigationController, model: MyDeliveryModel)
 }
 
 final class MyDeliveryViewModel {
     private let service: MyDeliveryServiceProtocol
-    private let router: MyDeliveryRouterProtocol
     private var deliveryData: [DeliveryDetails]?
     private let userDefaults = UserDefaults()
+    var didSelect: ((_ model: MyDeliveryModel) -> Void)?
     
-    init(service: MyDeliveryServiceProtocol, router: MyDeliveryRouterProtocol) {
+    init(service: MyDeliveryServiceProtocol) {
         self.service = service
-        self.router = router
     }
 }
 
@@ -48,6 +45,10 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
         return cModel
     }
     
+    func didSelectCell(at indexPath: IndexPath) {
+        self.didSelect?(cellAt(indexPath))
+    }
+    
     func fetchDeliveryList(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void) {
         service.fetchListOfDeliveries { [weak self] result in
             switch result {
@@ -58,10 +59,6 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
                 completionHandler(false, error.localizedDescription)
             }
         }
-    }
-    
-    func redirectToDeliveryDetail(nav: UINavigationController, model: MyDeliveryModel) {
-        router.redirectToDeliveryDetail(nav: nav, model: model)
     }
 }
 

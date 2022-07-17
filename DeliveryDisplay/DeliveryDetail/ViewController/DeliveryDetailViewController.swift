@@ -129,6 +129,11 @@ final class DeliveryDetailViewController: UIViewController {
         super.viewWillLayoutSubviews()
         setupFrames()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewModel.viewDidDisappear()
+    }
 }
 
 private extension DeliveryDetailViewController {
