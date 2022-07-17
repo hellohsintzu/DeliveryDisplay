@@ -10,7 +10,6 @@
 		065DD78A28826C0600AFE5D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD78928826C0600AFE5D8 /* AppDelegate.swift */; };
 		065DD78C28826C0600AFE5D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD78B28826C0600AFE5D8 /* SceneDelegate.swift */; };
 		065DD78E28826C0600AFE5D8 /* MyDeliveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD78D28826C0600AFE5D8 /* MyDeliveryViewController.swift */; };
-		065DD79428826C0600AFE5D8 /* DeliveryDisplay.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 065DD79228826C0600AFE5D8 /* DeliveryDisplay.xcdatamodeld */; };
 		065DD79628826C0800AFE5D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065DD79528826C0800AFE5D8 /* Assets.xcassets */; };
 		065DD79928826C0800AFE5D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 065DD79728826C0800AFE5D8 /* LaunchScreen.storyboard */; };
 		065DD7A428826C0900AFE5D8 /* DeliveryDisplayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7A328826C0900AFE5D8 /* DeliveryDisplayTests.swift */; };
@@ -20,10 +19,10 @@
 		065DD7C42882890700AFE5D8 /* MyDeliveryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7C32882890700AFE5D8 /* MyDeliveryService.swift */; };
 		065DD7C728828C0B00AFE5D8 /* deliveries.json in Resources */ = {isa = PBXBuildFile; fileRef = 065DD7C628828C0B00AFE5D8 /* deliveries.json */; };
 		065DD7CA2882912D00AFE5D8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7C92882912D00AFE5D8 /* Constants.swift */; };
-		065DD7CD2882920000AFE5D8 /* MyDeliveryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7CC2882920000AFE5D8 /* MyDeliveryModel.swift */; };
+		065DD7CD2882920000AFE5D8 /* DeliveryDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7CC2882920000AFE5D8 /* DeliveryDetailsModel.swift */; };
 		065DD7D22882985E00AFE5D8 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065DD7D12882985E00AFE5D8 /* NetworkService.swift */; };
 		0671E9102882ECAF003190D9 /* MyDeliveryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E90F2882ECAF003190D9 /* MyDeliveryTableViewCell.swift */; };
-		0671E9142883AB60003190D9 /* MyDeliveryCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E9132883AB60003190D9 /* MyDeliveryCellModel.swift */; };
+		0671E9142883AB60003190D9 /* MyDeliveryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E9132883AB60003190D9 /* MyDeliveryModel.swift */; };
 		0671E9192883BC65003190D9 /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E9182883BC65003190D9 /* DeliveryDetailViewController.swift */; };
 		0671E91B2883BC87003190D9 /* DeliveryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E91A2883BC87003190D9 /* DeliveryDetailViewModel.swift */; };
 		0671E91E2883C115003190D9 /* MyDeliveryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E91D2883C115003190D9 /* MyDeliveryRouter.swift */; };
@@ -53,7 +52,6 @@
 		065DD78928826C0600AFE5D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		065DD78B28826C0600AFE5D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		065DD78D28826C0600AFE5D8 /* MyDeliveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryViewController.swift; sourceTree = "<group>"; };
-		065DD79328826C0600AFE5D8 /* DeliveryDisplay.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DeliveryDisplay.xcdatamodel; sourceTree = "<group>"; };
 		065DD79528826C0800AFE5D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		065DD79828826C0800AFE5D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		065DD79A28826C0800AFE5D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,10 +64,10 @@
 		065DD7C32882890700AFE5D8 /* MyDeliveryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryService.swift; sourceTree = "<group>"; };
 		065DD7C628828C0B00AFE5D8 /* deliveries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deliveries.json; sourceTree = "<group>"; };
 		065DD7C92882912D00AFE5D8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		065DD7CC2882920000AFE5D8 /* MyDeliveryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryModel.swift; sourceTree = "<group>"; };
+		065DD7CC2882920000AFE5D8 /* DeliveryDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryDetailsModel.swift; sourceTree = "<group>"; };
 		065DD7D12882985E00AFE5D8 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		0671E90F2882ECAF003190D9 /* MyDeliveryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryTableViewCell.swift; sourceTree = "<group>"; };
-		0671E9132883AB60003190D9 /* MyDeliveryCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryCellModel.swift; sourceTree = "<group>"; };
+		0671E9132883AB60003190D9 /* MyDeliveryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryModel.swift; sourceTree = "<group>"; };
 		0671E9182883BC65003190D9 /* DeliveryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryDetailViewController.swift; sourceTree = "<group>"; };
 		0671E91A2883BC87003190D9 /* DeliveryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryDetailViewModel.swift; sourceTree = "<group>"; };
 		0671E91D2883C115003190D9 /* MyDeliveryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryRouter.swift; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 				065DD79528826C0800AFE5D8 /* Assets.xcassets */,
 				065DD79728826C0800AFE5D8 /* LaunchScreen.storyboard */,
 				065DD79A28826C0800AFE5D8 /* Info.plist */,
-				065DD79228826C0600AFE5D8 /* DeliveryDisplay.xcdatamodeld */,
 			);
 			path = DeliveryDisplay;
 			sourceTree = "<group>";
@@ -213,8 +210,8 @@
 		065DD7CB288291EE00AFE5D8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				065DD7CC2882920000AFE5D8 /* MyDeliveryModel.swift */,
-				0671E9132883AB60003190D9 /* MyDeliveryCellModel.swift */,
+				065DD7CC2882920000AFE5D8 /* DeliveryDetailsModel.swift */,
+				0671E9132883AB60003190D9 /* MyDeliveryModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -405,10 +402,9 @@
 				0671E9192883BC65003190D9 /* DeliveryDetailViewController.swift in Sources */,
 				065DD78A28826C0600AFE5D8 /* AppDelegate.swift in Sources */,
 				0671E91E2883C115003190D9 /* MyDeliveryRouter.swift in Sources */,
-				065DD7CD2882920000AFE5D8 /* MyDeliveryModel.swift in Sources */,
+				065DD7CD2882920000AFE5D8 /* DeliveryDetailsModel.swift in Sources */,
 				0671E9102882ECAF003190D9 /* MyDeliveryTableViewCell.swift in Sources */,
-				0671E9142883AB60003190D9 /* MyDeliveryCellModel.swift in Sources */,
-				065DD79428826C0600AFE5D8 /* DeliveryDisplay.xcdatamodeld in Sources */,
+				0671E9142883AB60003190D9 /* MyDeliveryModel.swift in Sources */,
 				065DD7CA2882912D00AFE5D8 /* Constants.swift in Sources */,
 				065DD7C2288288F400AFE5D8 /* MyDeliveryViewModel.swift in Sources */,
 				065DD78C28826C0600AFE5D8 /* SceneDelegate.swift in Sources */,
@@ -771,19 +767,6 @@
 			productName = SDWebImageMapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		065DD79228826C0600AFE5D8 /* DeliveryDisplay.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				065DD79328826C0600AFE5D8 /* DeliveryDisplay.xcdatamodel */,
-			);
-			currentVersion = 065DD79328826C0600AFE5D8 /* DeliveryDisplay.xcdatamodel */;
-			path = DeliveryDisplay.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 065DD77E28826C0600AFE5D8 /* Project object */;
 }

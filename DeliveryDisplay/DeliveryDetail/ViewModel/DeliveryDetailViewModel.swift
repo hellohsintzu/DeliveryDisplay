@@ -12,11 +12,13 @@ protocol DeliveryDetailViewModelProtocol {
     var receiverLabelTitle: String { get }
     var imageURLString: String { get }
     var deliveryFeeString: String { get }
+    var isFavorite: Bool { get set }
 }
 
 final class DeliveryDetailViewModel {
     private let deliveryDetail: MyDeliveryModel
-    
+    private let userDefaults = UserDefaults()
+
     init(model: MyDeliveryModel) {
         deliveryDetail = model
     }
@@ -37,5 +39,18 @@ extension DeliveryDetailViewModel: DeliveryDetailViewModelProtocol {
     
     var deliveryFeeString: String {
         return "\(Constants.MyDelivery.feeLabel)\(deliveryDetail.feeTitle)"
+    }
+    
+    var isFavorite: Bool {
+        get {
+            guard let isFav = userDefaults.value(forKey: deliveryDetail.id) as? Bool else {
+                return false
+            }
+            return isFav
+        }
+        
+        set {
+            userDefaults.setValue(newValue, forKey: deliveryDetail.id)
+        }
     }
 }

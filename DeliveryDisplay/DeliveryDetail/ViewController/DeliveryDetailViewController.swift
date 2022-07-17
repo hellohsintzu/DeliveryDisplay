@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 final class DeliveryDetailViewController: UIViewController {
-    private let viewModel: DeliveryDetailViewModelProtocol
+    private var viewModel: DeliveryDetailViewModelProtocol
     
     private let rootView = UIView()
     private let routeView: UIView = {
@@ -43,7 +43,6 @@ final class DeliveryDetailViewController: UIViewController {
         button.titleLabel?.font = .systemFont(ofSize: 15.0, weight: .semibold)
         button.addTarget(self, action: #selector(favButtonDidTap), for: .touchUpInside)
         button.backgroundColor = .orange
-        button.setImage(UIImage(systemName: "heart"), for: .normal)
         button.imageView?.tintColor = .white
         button.layer.cornerRadius = 10.0
         button.clipsToBounds = true
@@ -134,7 +133,9 @@ final class DeliveryDetailViewController: UIViewController {
 
 private extension DeliveryDetailViewController {
     @objc func favButtonDidTap() {
-        favButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        viewModel.isFavorite = !viewModel.isFavorite
+        let favImage = viewModel.isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+        favButton.setImage(favImage, for: .normal)
         favButton.imageView?.tintColor = .white
     }
     
@@ -143,6 +144,8 @@ private extension DeliveryDetailViewController {
         receiverLabel.text = viewModel.receiverLabelTitle
         goodsImageView.sd_setImage(with: URL(string: viewModel.imageURLString))
         feeLabel.text = viewModel.deliveryFeeString
+        let favImage = viewModel.isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+        favButton.setImage(favImage, for: .normal)
     }
     
     func setupSubViews() {
@@ -178,6 +181,5 @@ private extension DeliveryDetailViewController {
         feeLabel.frame = CGRect(x: view.frame.size.width/2, y: 455, width: (view.frame.size.width/2)-50, height: 30)
         
         favButton.frame = CGRect(x: 20, y: view.frame.size.height-70, width: view.frame.size.width-40, height: 40)
-        
     }
 }

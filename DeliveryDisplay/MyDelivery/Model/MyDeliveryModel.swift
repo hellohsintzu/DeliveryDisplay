@@ -2,29 +2,25 @@
 //  MyDeliveryModel.swift
 //  DeliveryDisplay
 //
-//  Created by 顏莘慈 on 2022/7/16.
+//  Created by 顏莘慈 on 2022/7/17.
 //
 
 import Foundation
 
-struct DeliveryDetails: Codable {
-    var id: String?
-    var remarks: String?
-    var pickupTime: String?
-    var goodsPicture: String?
-    var deliveryFee: String?
-    var surcharge: String?
-    var route: Route?
-    var sender: Sender?
-}
-
-struct Route: Codable {
-    var start: String?
-    var end: String?
-}
-
-struct Sender: Codable {
-    var phone: String?
-    var name: String?
-    var email: String?
+struct MyDeliveryModel {
+    var id: String
+    var senderTitle: String
+    var receiverTitle: String
+    var feeTitle: String
+    var imageURLString: String
+    var isFavorite: Bool
+    
+    init(id: String,senderTitle: String, receiverTitle: String, feeTitle: String, imageURLString: String, isFavorite: Bool) {
+        self.id = id
+        self.senderTitle = senderTitle
+        self.receiverTitle = receiverTitle
+        self.feeTitle = feeTitle
+        self.imageURLString = imageURLString
+        self.isFavorite = isFavorite
+    }
 }

@@ -24,6 +24,7 @@ final class MyDeliveryViewModel {
     private let service: MyDeliveryServiceProtocol
     private let router: MyDeliveryRouterProtocol
     private var deliveryData: [DeliveryDetails]?
+    private let userDefaults = UserDefaults()
     
     init(service: MyDeliveryServiceProtocol, router: MyDeliveryRouterProtocol) {
         self.service = service
@@ -37,11 +38,13 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
     }
     
     func cellAt(_ indexPath: IndexPath) -> MyDeliveryModel {
-        let cModel = MyDeliveryModel(senderTitle: self.deliveryData?[indexPath.row].route?.start ?? "",
-                                         receiverTitle: self.deliveryData?[indexPath.row].route?.end ?? "",
-                                         feeTitle: self.generateDeliveryFee(indexPath),
-                                         imageURLString: self.deliveryData?[indexPath.row].goodsPicture ?? "",
-                                         isFavorite: false)
+        let isFav: Bool? = userDefaults.value(forKey: self.deliveryData?[indexPath.row].id ?? "") as? Bool
+        let cModel = MyDeliveryModel(id: self.deliveryData?[indexPath.row].id ?? "",
+                                     senderTitle: self.deliveryData?[indexPath.row].route?.start ?? "",
+                                     receiverTitle: self.deliveryData?[indexPath.row].route?.end ?? "",
+                                     feeTitle: self.generateDeliveryFee(indexPath),
+                                     imageURLString: self.deliveryData?[indexPath.row].goodsPicture ?? "",
+                                     isFavorite: isFav ?? false)
         return cModel
     }
     

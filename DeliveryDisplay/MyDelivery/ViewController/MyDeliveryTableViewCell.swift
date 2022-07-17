@@ -21,21 +21,21 @@ final class MyDeliveryTableViewCell: UITableViewCell {
     private let senderLabel: UILabel = {
         let label = UILabel()
         label.textColor = .darkGray
-        label.font = .systemFont(ofSize: 18.0, weight: .semibold)
+        label.font = .systemFont(ofSize: 16.0, weight: .semibold)
         return label
     }()
     
     private let receiverLabel: UILabel = {
         let label = UILabel()
         label.textColor = .darkGray
-        label.font = .systemFont(ofSize: 18.0, weight: .semibold)
+        label.font = .systemFont(ofSize: 16.0, weight: .semibold)
         return label
     }()
     
     private let feeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .darkGray
-        label.font = .systemFont(ofSize: 20.0, weight: .bold)
+        label.font = .systemFont(ofSize: 18.0, weight: .bold)
         return label
     }()
     
@@ -90,7 +90,7 @@ private extension MyDeliveryTableViewCell {
         senderLabel.frame = CGRect(x: 10, y: 10, width: contentView.frame.size.width/2, height: contentView.frame.size.height/2)
         receiverLabel.frame = CGRect(x: 10, y: 35, width: contentView.frame.size.width/2, height: contentView.frame.size.height/2)
         feeLabel.frame = CGRect(x: contentView.frame.size.width/2, y: 35, width: contentView.frame.size.width, height: contentView.frame.size.height/2)
-        favoriteIndicator.frame = CGRect(x: contentView.frame.size.width/2, y: 10, width: 20, height: 20)
+        favoriteIndicator.frame = CGRect(x: contentView.frame.size.width/2+30, y: 15, width: 25, height: 25)
     }
     
     func setValuesNil() {
