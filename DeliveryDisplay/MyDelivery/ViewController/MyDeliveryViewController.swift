@@ -29,7 +29,7 @@ final class MyDeliveryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupComponents()
-        viewModel.fetchDeliveryList { [weak self] (isSuccess, error) in
+        viewModel.fetchDeliveryList(isPagination: false) { [weak self] (isSuccess, error) in
             DispatchQueue.main.async {
                 isSuccess ? self?.tableView.reloadData() : self?.showAlert(message: error ?? "")
             }
@@ -64,12 +64,35 @@ extension MyDeliveryViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension MyDeliveryViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        if position > (tableView.contentSize.height-100-scrollView.frame.size.height) {
+            self.tableView.tableFooterView = createSpinnerFooter()
+            viewModel.fetchDeliveryList(isPagination: true) { [weak self] (isSuccess, error) in
+                DispatchQueue.main.async {
+                    isSuccess ? self?.tableView.reloadData() : self?.showAlert(message: error ?? "")
+                }
+            }
+        }
+    }
+}
+
 private extension MyDeliveryViewController {
     func setupComponents() {
         self.navigationItem.title = Constants.MyDelivery.myDeliveryTitle
         self.view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
     }
     
     func showAlert(message: String) {

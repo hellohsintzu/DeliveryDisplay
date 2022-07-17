@@ -177,13 +177,13 @@ private extension DeliveryDetailViewController {
         toLabel.frame = CGRect(x: 30, y: 140, width: (view.frame.size.width/3)-30, height: 30)
         receiverLabel.frame = CGRect(x: view.frame.size.width/3, y: 140, width: view.frame.size.width/2, height: 30)
         
-        goodsView.frame = CGRect(x: 10, y: 200, width: view.frame.size.width-20, height: 220)
-        goodsLabel.frame = CGRect(x: 30, y: 210, width: view.frame.size.width-50, height: 30)
-        goodsImageView.frame = CGRect(x: 30, y: 250, width: 150, height: 150)
+        goodsView.frame = CGRect(x: 10, y: 200, width: view.frame.size.width-20, height: 180)
+        goodsLabel.frame = CGRect(x: 30, y: 210, width: view.frame.size.width-50, height: 20)
+        goodsImageView.frame = CGRect(x: 30, y: 235, width: 130, height: 130)
         
-        feeView.frame = CGRect(x: 10, y: 440, width: view.frame.size.width-20, height: 60)
-        deliveryLabel.frame = CGRect(x: 30, y: 455, width: (view.frame.size.width/2)-50, height: 30)
-        feeLabel.frame = CGRect(x: view.frame.size.width/2, y: 455, width: (view.frame.size.width/2)-50, height: 30)
+        feeView.frame = CGRect(x: 10, y: 400, width: view.frame.size.width-20, height: 50)
+        deliveryLabel.frame = CGRect(x: 30, y: 415, width: (view.frame.size.width/2)-50, height: 20)
+        feeLabel.frame = CGRect(x: view.frame.size.width/2, y: 415, width: (view.frame.size.width/2)-50, height: 20)
         
         favButton.frame = CGRect(x: 20, y: view.frame.size.height-70, width: view.frame.size.width-40, height: 40)
     }

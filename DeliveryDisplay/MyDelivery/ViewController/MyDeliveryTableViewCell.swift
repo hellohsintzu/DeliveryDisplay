@@ -87,7 +87,7 @@ private extension MyDeliveryTableViewCell {
     func setupFrames() {
         let imagesize = contentView.frame.size.height-10
         cellImageView.frame = CGRect(x: contentView.frame.size.width-imagesize-5, y: 5, width: imagesize, height: imagesize)
-        senderLabel.frame = CGRect(x: 10, y: 10, width: contentView.frame.size.width/2, height: contentView.frame.size.height/2)
+        senderLabel.frame = CGRect(x: 10, y: 10, width: contentView.frame.size.width-imagesize-15, height: contentView.frame.size.height/2)
         receiverLabel.frame = CGRect(x: 10, y: 35, width: contentView.frame.size.width/2, height: contentView.frame.size.height/2)
         feeLabel.frame = CGRect(x: contentView.frame.size.width/2, y: 35, width: contentView.frame.size.width, height: contentView.frame.size.height/2)
         favoriteIndicator.frame = CGRect(x: contentView.frame.size.width/2+30, y: 15, width: 25, height: 25)
