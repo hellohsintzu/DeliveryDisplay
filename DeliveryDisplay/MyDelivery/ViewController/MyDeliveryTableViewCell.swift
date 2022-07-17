@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 final class MyDeliveryTableViewCell: UITableViewCell {
     static let identifier = "MyDeliveryTableViewCell"
@@ -69,7 +70,7 @@ final class MyDeliveryTableViewCell: UITableViewCell {
         senderLabel.text = "\(Constants.MyDelivery.senderLabel)\(cModel.senderTitle)"
         receiverLabel.text = "\(Constants.MyDelivery.receiverLabel)\(cModel.receiverTitle)"
         feeLabel.text = "\(Constants.MyDelivery.feeLabel)\(cModel.feeTitle)"
-        cellImageView.load(url: URL(string: cModel.imageURLString))
+        cellImageView.sd_setImage(with: URL(string: cModel.imageURLString))
         favoriteIndicator.image = cModel.isFavorite ? UIImage(systemName: "heart.fill") : nil
     }
 }
