@@ -39,7 +39,8 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
         let cModel = MyDeliveryModel(id: self.deliveryData[indexPath.row].id ?? "",
                                      senderTitle: self.deliveryData[indexPath.row].route?.start ?? "",
                                      receiverTitle: self.deliveryData[indexPath.row].route?.end ?? "",
-                                     feeTitle: self.generateDeliveryFee(indexPath),
+                                     deliveryFee: self.deliveryData[indexPath.row].deliveryFee ?? "",
+                                     surcharge: self.deliveryData[indexPath.row].surcharge ?? "",
                                      imageURLString: self.deliveryData[indexPath.row].goodsPicture ?? "",
                                      isFavorite: isFav ?? false)
         return cModel
@@ -69,7 +70,8 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
 private extension MyDeliveryViewModel {
     func generateDeliveryFee(_ indexPath: IndexPath) -> String {
         guard var deliveryFee = self.deliveryData[indexPath.row].deliveryFee,
-              var surcharge = self.deliveryData[indexPath.row].surcharge else { return "" }
+              var surcharge = self.deliveryData[indexPath.row].surcharge,
+              !deliveryFee.isEmpty, !surcharge.isEmpty  else { return "" }
         deliveryFee.removeFirst()
         surcharge.removeFirst()
         let deliveryFeeFloat = Float(deliveryFee) ?? 0.0

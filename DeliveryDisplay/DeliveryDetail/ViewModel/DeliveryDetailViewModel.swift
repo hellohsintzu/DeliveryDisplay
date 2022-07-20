@@ -18,8 +18,7 @@ protocol DeliveryDetailViewModelProtocol {
 }
 
 final class DeliveryDetailViewModel {
-    private let deliveryDetail: MyDeliveryModel
-    private let userDefaults = UserDefaults()
+    private var deliveryDetail: MyDeliveryModel
     var didTapBackBtn: (() -> Void)?
     
     init(model: MyDeliveryModel) {
@@ -41,23 +40,34 @@ extension DeliveryDetailViewModel: DeliveryDetailViewModelProtocol {
     }
     
     var deliveryFeeString: String {
-        return "\(Constants.MyDelivery.feeLabel)\(deliveryDetail.feeTitle)"
+        return "\(Constants.MyDelivery.feeLabel)\(generateDeliveryFee())"
     }
     
     var isFavorite: Bool {
         get {
-            guard let isFav = userDefaults.value(forKey: deliveryDetail.id) as? Bool else {
-                return false
-            }
-            return isFav
+            deliveryDetail.isFavorite
         }
         
         set {
-            userDefaults.setValue(newValue, forKey: deliveryDetail.id)
+            deliveryDetail.isFavorite = newValue
         }
     }
     
     func viewDidDisappear() {
         self.didTapBackBtn?()
+    }
+}
+
+private extension DeliveryDetailViewModel {
+    func generateDeliveryFee() -> String {
+        var deliveryFee = deliveryDetail.deliveryFee
+        var surcharge = deliveryDetail.surcharge
+        guard !deliveryFee.isEmpty, !surcharge.isEmpty  else { return "" }
+        deliveryFee.removeFirst()
+        surcharge.removeFirst()
+        let deliveryFeeFloat = Float(deliveryFee) ?? 0.0
+        let surchargeFloat = Float(surcharge) ?? 0.0
+        let fee = deliveryFeeFloat + surchargeFloat
+        return String(format: "%.2f", fee)
     }
 }

@@ -69,7 +69,7 @@ final class MyDeliveryTableViewCell: UITableViewCell {
     func configure(_ cModel: MyDeliveryModel) {
         senderLabel.text = "\(Constants.MyDelivery.senderLabel)\(cModel.senderTitle)"
         receiverLabel.text = "\(Constants.MyDelivery.receiverLabel)\(cModel.receiverTitle)"
-        feeLabel.text = "\(Constants.MyDelivery.feeLabel)\(cModel.feeTitle)"
+        feeLabel.text = "\(Constants.MyDelivery.feeLabel)\(self.generateDeliveryFee(cModel))"
         cellImageView.sd_setImage(with: URL(string: cModel.imageURLString))
         favoriteIndicator.image = cModel.isFavorite ? UIImage(systemName: "heart.fill") : nil
     }
@@ -98,5 +98,17 @@ private extension MyDeliveryTableViewCell {
         receiverLabel.text = nil
         feeLabel.text = nil
         cellImageView.image = nil
+    }
+    
+    func generateDeliveryFee(_ cModel: MyDeliveryModel) -> String {
+        var deliveryFee = cModel.deliveryFee
+        var surcharge = cModel.surcharge
+        guard !deliveryFee.isEmpty, !surcharge.isEmpty  else { return "" }
+        deliveryFee.removeFirst()
+        surcharge.removeFirst()
+        let deliveryFeeFloat = Float(deliveryFee) ?? 0.0
+        let surchargeFloat = Float(surcharge) ?? 0.0
+        let fee = deliveryFeeFloat + surchargeFloat
+        return String(format: "%.2f", fee)
     }
 }

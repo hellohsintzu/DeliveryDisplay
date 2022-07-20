@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 protocol MyDeliveryServiceProtocol {
     var isPaginating: Bool { get set }
@@ -14,7 +15,9 @@ protocol MyDeliveryServiceProtocol {
 
 final class MyDeliveryService {
     private let networkClient: NetworkServiceProtocol
+    private let moc = CoreDataManager.shared.moc
     private var isPaginationOn: Bool = false
+    private var deliveryList: [DeliveryDetails] = []
     
     init(networkClient: NetworkServiceProtocol) {
         self.networkClient = networkClient
@@ -36,18 +39,38 @@ extension MyDeliveryService: MyDeliveryServiceProtocol {
         if isPagination {
             self.isPaginating = true
         }
-        let urlString = "\(Constants.APIConstants.urlString)\(Constants.APIConstants.endpoint)"
-        
-        networkClient.request(urlString: urlString, model: [DeliveryDetails].self) { result in
-            switch result {
-            case .success(let data):
-                completionHandler(.success(data))
-                if isPagination {
-                    self.isPaginating = false
+        if deliveryList.isEmpty {
+            let urlString = "\(Constants.APIConstants.urlString)\(Constants.APIConstants.endpoint)"
+            
+            networkClient.request(urlString: urlString, model: [DeliveryDetails].self) { result in
+                switch result {
+                case .success(let data):
+                    do {
+                        try self.moc.save()
+                    } catch {
+                        debugPrint(error)
+                    }
+                    completionHandler(.success(data))
+                    if isPagination {
+                        self.isPaginating = false
+                    }
+                case .failure(let error):
+                    completionHandler(.failure(error))
                 }
-            case .failure(let error):
-                completionHandler(.failure(error))
             }
+        } else {
+            completionHandler(.success(deliveryList))
+        }
+    }
+    
+    private func fetchListOfDeliveryFromCoreData() {
+        let request = NSFetchRequest<DeliveryDetails>(entityName: "Delivery")
+        do {
+            let data = try moc.fetch(request)
+            self.deliveryList = data
+        } catch {
+            print(error.localizedDescription)
+            self.deliveryList = []
         }
     }
 }

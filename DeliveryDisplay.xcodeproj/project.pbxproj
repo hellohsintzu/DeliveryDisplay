@@ -30,6 +30,9 @@
 		0671E92F28843478003190D9 /* MyDeliveryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E92E28843478003190D9 /* MyDeliveryCoordinator.swift */; };
 		0671E931288439BC003190D9 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E930288439BC003190D9 /* AppCoordinator.swift */; };
 		0671E93828843DFF003190D9 /* DeliveryDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E93728843DFF003190D9 /* DeliveryDetailCoordinator.swift */; };
+		067BD5A8288595AF0039C086 /* DeliveryDisplay.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 067BD5A6288595AF0039C086 /* DeliveryDisplay.xcdatamodeld */; };
+		067BD5AA2885975C0039C086 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067BD5A92885975C0039C086 /* CoreDataManager.swift */; };
+		06BB0FB62886F3DC0012CEF3 /* DeliveryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BB0FB52886F3DC0012CEF3 /* DeliveryList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +78,9 @@
 		0671E92E28843478003190D9 /* MyDeliveryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeliveryCoordinator.swift; sourceTree = "<group>"; };
 		0671E930288439BC003190D9 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		0671E93728843DFF003190D9 /* DeliveryDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryDetailCoordinator.swift; sourceTree = "<group>"; };
+		067BD5A7288595AF0039C086 /* DeliveryDisplay.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DeliveryDisplay.xcdatamodel; sourceTree = "<group>"; };
+		067BD5A92885975C0039C086 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		06BB0FB52886F3DC0012CEF3 /* DeliveryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +144,8 @@
 				065DD79528826C0800AFE5D8 /* Assets.xcassets */,
 				065DD79728826C0800AFE5D8 /* LaunchScreen.storyboard */,
 				065DD79A28826C0800AFE5D8 /* Info.plist */,
+				067BD5A6288595AF0039C086 /* DeliveryDisplay.xcdatamodeld */,
+				067BD5A92885975C0039C086 /* CoreDataManager.swift */,
 			);
 			path = DeliveryDisplay;
 			sourceTree = "<group>";
@@ -217,6 +225,7 @@
 			children = (
 				065DD7CC2882920000AFE5D8 /* DeliveryDetailsModel.swift */,
 				0671E9132883AB60003190D9 /* MyDeliveryModel.swift */,
+				06BB0FB52886F3DC0012CEF3 /* DeliveryList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -421,16 +430,19 @@
 				065DD7D22882985E00AFE5D8 /* NetworkService.swift in Sources */,
 				0671E91B2883BC87003190D9 /* DeliveryDetailViewModel.swift in Sources */,
 				065DD78E28826C0600AFE5D8 /* MyDeliveryViewController.swift in Sources */,
+				067BD5AA2885975C0039C086 /* CoreDataManager.swift in Sources */,
 				065DD7C42882890700AFE5D8 /* MyDeliveryService.swift in Sources */,
 				0671E931288439BC003190D9 /* AppCoordinator.swift in Sources */,
 				0671E92F28843478003190D9 /* MyDeliveryCoordinator.swift in Sources */,
 				0671E9192883BC65003190D9 /* DeliveryDetailViewController.swift in Sources */,
+				06BB0FB62886F3DC0012CEF3 /* DeliveryList.swift in Sources */,
 				065DD78A28826C0600AFE5D8 /* AppDelegate.swift in Sources */,
 				065DD7CD2882920000AFE5D8 /* DeliveryDetailsModel.swift in Sources */,
 				0671E9102882ECAF003190D9 /* MyDeliveryTableViewCell.swift in Sources */,
 				0671E9142883AB60003190D9 /* MyDeliveryModel.swift in Sources */,
 				065DD7CA2882912D00AFE5D8 /* Constants.swift in Sources */,
 				065DD7C2288288F400AFE5D8 /* MyDeliveryViewModel.swift in Sources */,
+				067BD5A8288595AF0039C086 /* DeliveryDisplay.xcdatamodeld in Sources */,
 				065DD78C28826C0600AFE5D8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -791,6 +803,19 @@
 			productName = SDWebImageMapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		067BD5A6288595AF0039C086 /* DeliveryDisplay.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				067BD5A7288595AF0039C086 /* DeliveryDisplay.xcdatamodel */,
+			);
+			currentVersion = 067BD5A7288595AF0039C086 /* DeliveryDisplay.xcdatamodel */;
+			path = DeliveryDisplay.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 065DD77E28826C0600AFE5D8 /* Project object */;
 }
