@@ -29,7 +29,7 @@ final class MyDeliveryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupComponents()
-        viewModel.fetchDeliveryList(isPagination: false) { [weak self] (isSuccess, error) in
+        viewModel.loadData { [weak self] (isSuccess, error) in
             DispatchQueue.main.async {
                 isSuccess ? self?.tableView.reloadData() : self?.showAlert(message: error ?? "")
             }

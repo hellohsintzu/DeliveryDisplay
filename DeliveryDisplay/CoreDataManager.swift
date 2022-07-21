@@ -7,48 +7,38 @@
 
 import CoreData
 
-final class CoreDataManager {
+final class CoreDataManager: NSObject {
     
     static let shared = CoreDataManager()
     
-    private init() {}
+    private override init() {}
     
     lazy var persistentContainer: NSPersistentContainer = {
         let persistentContainer = NSPersistentContainer(name: "DeliveryDisplay")
+        let description = NSPersistentStoreDescription()
+        var sqlUrl = URL(fileURLWithPath: NSHomeDirectory())
+        sqlUrl.appendPathComponent("Documents")
+        sqlUrl.appendPathComponent("program.sqlite")
+        description.url = sqlUrl
+        persistentContainer.persistentStoreDescriptions = [description]
         persistentContainer.loadPersistentStores { _, error in
             print(error?.localizedDescription ?? "")
         }
         return persistentContainer
     }()
     
-    lazy var moc: NSManagedObjectContext = {
+    func managedObjectContext() -> NSManagedObjectContext {
         return persistentContainer.viewContext
-    }()
-    
-    func get<T: NSManagedObject>(_ id: NSManagedObjectID) -> T? {
-        do {
-            return try moc.existingObject(with: id) as? T
-        } catch {
-            print(error)
-        }
-        return nil
     }
     
-    func getAll<T: NSManagedObject>() -> [T] {
-        do {
-            let fetchRequest = NSFetchRequest<T>(entityName: "\(T.self)")
-            return try self.moc.fetch(fetchRequest)
-        } catch {
-            print(error)
-            return []
-        }
-    }
-    
-    func save() {
-        do {
-            try moc.save()
-        } catch {
-            print(error)
+    func saveContext () {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }

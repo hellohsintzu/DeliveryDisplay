@@ -7,6 +7,7 @@
 
 import CoreData
 
+@objc
 class DeliveryList: NSManagedObject {
     @NSManaged var deliveryFee: String?
     @NSManaged var end: String?
@@ -16,14 +17,23 @@ class DeliveryList: NSManagedObject {
     @NSManaged var start: String?
     @NSManaged var surcharge: String?
     
-    func convertToMyDeliveryModel() -> MyDeliveryModel {
-        let model = MyDeliveryModel(id: self.id ?? "",
-                                    senderTitle: self.start ?? "",
-                                    receiverTitle: self.end ?? "",
-                                    deliveryFee: self.deliveryFee ?? "",
-                                    surcharge: self.surcharge ?? "",
-                                    imageURLString: self.goodsPicture ?? "",
-                                    isFavorite: self.isFavorite)
+    func convertToMyDeliveryModel() -> MyDeliveryModel? {
+        guard let id = self.id,
+              let senderTitle = self.start,
+              let receiverTitle = self.end,
+              let deliveryFee = self.deliveryFee,
+              let surcharge = self.surcharge,
+              let imageURLString = self.goodsPicture else {
+                  return nil
+              }
+                
+        let model = MyDeliveryModel(id: id,
+                                    senderTitle: senderTitle,
+                                    receiverTitle: receiverTitle,
+                                    deliveryFee: deliveryFee,
+                                    surcharge: surcharge,
+                                    imageURLString: imageURLString,
+                                    isFavorite: isFavorite)
         return model
     }
 }

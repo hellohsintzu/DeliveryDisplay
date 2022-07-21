@@ -5,7 +5,7 @@
 //  Created by 顏莘慈 on 2022/7/16.
 //
 
-import Foundation
+import CoreData
 
 protocol MyDeliveryViewModelProtocol {
     // TableView
@@ -14,14 +14,15 @@ protocol MyDeliveryViewModelProtocol {
     func didSelectCell(at indexPath: IndexPath)
     
     // API call
+    func loadData(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void)
     func fetchDeliveryList(isPagination: Bool, completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void)
 }
 
 final class MyDeliveryViewModel {
     private let service: MyDeliveryServiceProtocol
-    private var deliveryData: [DeliveryDetails] = []
+    private var deliveryList: [MyDeliveryModel?] = []
     private var currentPage: Int = 1
-    private let userDefaults = UserDefaults()
+    private let moc = CoreDataManager.shared
     var didSelect: ((_ model: MyDeliveryModel) -> Void)?
     
     init(service: MyDeliveryServiceProtocol) {
@@ -31,18 +32,18 @@ final class MyDeliveryViewModel {
 
 extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
     var numberOfRows: Int {
-        return self.deliveryData.count
+        return self.deliveryList.count
     }
     
     func cellAt(_ indexPath: IndexPath) -> MyDeliveryModel {
-        let isFav: Bool? = userDefaults.value(forKey: self.deliveryData[indexPath.row].id ?? "") as? Bool
-        let cModel = MyDeliveryModel(id: self.deliveryData[indexPath.row].id ?? "",
-                                     senderTitle: self.deliveryData[indexPath.row].route?.start ?? "",
-                                     receiverTitle: self.deliveryData[indexPath.row].route?.end ?? "",
-                                     deliveryFee: self.deliveryData[indexPath.row].deliveryFee ?? "",
-                                     surcharge: self.deliveryData[indexPath.row].surcharge ?? "",
-                                     imageURLString: self.deliveryData[indexPath.row].goodsPicture ?? "",
-                                     isFavorite: isFav ?? false)
+        fetchListOfDeliveryFromCoreData()
+        let cModel = MyDeliveryModel(id: deliveryList[indexPath.row]?.id ?? "",
+                                     senderTitle: deliveryList[indexPath.row]?.senderTitle ?? "",
+                                     receiverTitle: deliveryList[indexPath.row]?.receiverTitle ?? "",
+                                     deliveryFee: deliveryList[indexPath.row]?.deliveryFee ?? "",
+                                     surcharge: deliveryList[indexPath.row]?.surcharge ?? "",
+                                     imageURLString: deliveryList[indexPath.row]?.imageURLString ?? "",
+                                     isFavorite: deliveryList[indexPath.row]?.isFavorite ?? false)
         return cModel
     }
     
@@ -50,15 +51,23 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
         self.didSelect?(cellAt(indexPath))
     }
     
+    func loadData(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void) {
+        self.fetchListOfDeliveryFromCoreData()
+        if self.deliveryList.isEmpty {
+            fetchDeliveryList(isPagination: false, completionHandler: completionHandler)
+        } else {
+            completionHandler(true, nil)
+        }
+    }
+    
     func fetchDeliveryList(isPagination: Bool, completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void) {
         guard !service.isPaginating, self.currentPage <= 5 else { return }
         service.fetchListOfDeliveries(isPagination: isPagination) { [weak self] result in
             switch result {
             case .success(let data):
-                for tempData in data {
-                    self?.deliveryData.append(tempData)
-                }
+                self?.deliveryList = self?.convertDeliveryDetailsToModel(data) ?? []
                 self?.currentPage += 1
+                self?.moc.saveContext()
                 completionHandler(true, nil)
             case .failure(let error):
                 completionHandler(false, error.localizedDescription)
@@ -68,15 +77,23 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
 }
 
 private extension MyDeliveryViewModel {
-    func generateDeliveryFee(_ indexPath: IndexPath) -> String {
-        guard var deliveryFee = self.deliveryData[indexPath.row].deliveryFee,
-              var surcharge = self.deliveryData[indexPath.row].surcharge,
-              !deliveryFee.isEmpty, !surcharge.isEmpty  else { return "" }
-        deliveryFee.removeFirst()
-        surcharge.removeFirst()
-        let deliveryFeeFloat = Float(deliveryFee) ?? 0.0
-        let surchargeFloat = Float(surcharge) ?? 0.0
-        let fee = deliveryFeeFloat + surchargeFloat
-        return String(format: "%.2f", fee)
+    func convertDeliveryDetailsToModel(_ details: [DeliveryDetails]) -> [MyDeliveryModel] {
+        var modelArr: [MyDeliveryModel] = []
+        for detail in details {
+            let model = MyDeliveryModel(id: detail.id ?? "",
+                                        senderTitle: detail.route?.start ?? "",
+                                        receiverTitle: detail.route?.end ?? "",
+                                        deliveryFee: detail.deliveryFee ?? "",
+                                        surcharge: detail.surcharge ?? "",
+                                        imageURLString: detail.goodsPicture ?? "",
+                                        isFavorite: false)
+            modelArr.append(model)
+        }
+        return modelArr
+    }
+    
+    func fetchListOfDeliveryFromCoreData() {
+        let data = DeliveryList(context: moc.managedObjectContext())
+        self.deliveryList.append(data.convertToMyDeliveryModel())
     }
 }

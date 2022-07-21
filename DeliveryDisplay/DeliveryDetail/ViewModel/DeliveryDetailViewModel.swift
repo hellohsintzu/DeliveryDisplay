@@ -19,6 +19,7 @@ protocol DeliveryDetailViewModelProtocol {
 
 final class DeliveryDetailViewModel {
     private var deliveryDetail: MyDeliveryModel
+    private let moc = CoreDataManager.shared
     var didTapBackBtn: (() -> Void)?
     
     init(model: MyDeliveryModel) {
@@ -54,6 +55,7 @@ extension DeliveryDetailViewModel: DeliveryDetailViewModelProtocol {
     }
     
     func viewDidDisappear() {
+        moc.saveContext()
         self.didTapBackBtn?()
     }
 }

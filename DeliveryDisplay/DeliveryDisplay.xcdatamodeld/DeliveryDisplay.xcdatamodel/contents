@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Delivery" representedClassName="Delivery" syncable="YES" codeGenerationType="class">
+    <entity name="DeliveryList" representedClassName=".DeliveryList" syncable="YES">
         <attribute name="deliveryFee" optional="YES" attributeType="String"/>
         <attribute name="end" optional="YES" attributeType="String"/>
         <attribute name="goodsPicture" optional="YES" attributeType="String"/>
@@ -10,6 +10,6 @@
         <attribute name="surcharge" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Delivery" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="DeliveryList" positionX="-63" positionY="-18" width="128" height="134"/>
     </elements>
 </model>
