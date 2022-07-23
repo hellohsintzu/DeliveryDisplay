@@ -5,7 +5,8 @@
 //  Created by 顏莘慈 on 2022/7/16.
 //
 
-import CoreData
+import Foundation
+import RealmSwift
 
 protocol MyDeliveryViewModelProtocol {
     // TableView
@@ -21,8 +22,8 @@ protocol MyDeliveryViewModelProtocol {
 final class MyDeliveryViewModel {
     private let service: MyDeliveryServiceProtocol
     private var deliveryList: [MyDeliveryModel?] = []
+    private var realmObject: Results<MyDeliveryModelList>? = nil
     private var currentPage: Int = 1
-    private let moc = CoreDataManager.shared
     var didSelect: ((_ model: MyDeliveryModel) -> Void)?
     
     init(service: MyDeliveryServiceProtocol) {
@@ -36,7 +37,7 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
     }
     
     func cellAt(_ indexPath: IndexPath) -> MyDeliveryModel {
-        fetchListOfDeliveryFromCoreData()
+        self.fetchObjectFromRealm()
         let cModel = MyDeliveryModel(id: deliveryList[indexPath.row]?.id ?? "",
                                      senderTitle: deliveryList[indexPath.row]?.senderTitle ?? "",
                                      receiverTitle: deliveryList[indexPath.row]?.receiverTitle ?? "",
@@ -52,12 +53,8 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
     }
     
     func loadData(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void) {
-        self.fetchListOfDeliveryFromCoreData()
-        if self.deliveryList.isEmpty {
-            fetchDeliveryList(isPagination: false, completionHandler: completionHandler)
-        } else {
-            completionHandler(true, nil)
-        }
+        self.fetchObjectFromRealm()
+        self.deliveryList.isEmpty ?  fetchDeliveryList(isPagination: false, completionHandler: completionHandler) : completionHandler(true, nil)
     }
     
     func fetchDeliveryList(isPagination: Bool, completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void) {
@@ -66,8 +63,8 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
             switch result {
             case .success(let data):
                 self?.deliveryList = self?.convertDeliveryDetailsToModel(data) ?? []
+                self?.saveResponseToRealm(data)
                 self?.currentPage += 1
-                self?.moc.saveContext()
                 completionHandler(true, nil)
             case .failure(let error):
                 completionHandler(false, error.localizedDescription)
@@ -92,8 +89,32 @@ private extension MyDeliveryViewModel {
         return modelArr
     }
     
-    func fetchListOfDeliveryFromCoreData() {
-        let data = DeliveryList(context: moc.managedObjectContext())
-        self.deliveryList.append(data.convertToMyDeliveryModel())
+    func fetchObjectFromRealm() {
+        let localRealm: Realm? = try? Realm()
+        self.realmObject = localRealm?.objects(MyDeliveryModelList.self)
+        if let object = self.realmObject?.first {
+            for model in object.myDeliveryModelList {
+                self.deliveryList.append(model.convertToMyDeliveryModel())
+            }
+        }
+    }
+    
+    func saveResponseToRealm(_ data: [DeliveryDetails]) {
+        let localRealm: Realm? = try? Realm()
+        let object = List<DeliveryList>()
+        for detail in data {
+            let model = DeliveryList(id: detail.id ?? "",
+                                     start: detail.route?.start ?? "",
+                                     end: detail.route?.end ?? "",
+                                     deliveryFee: detail.deliveryFee ?? "",
+                                     surcharge: detail.surcharge ?? "",
+                                     goodsPicture: detail.goodsPicture ?? "",
+                                     isFavorite: false)
+            object.append(model)
+        }
+        let deliveryModel = MyDeliveryModelList(myDeliveryModelList: object)
+        try? localRealm?.write({
+            localRealm?.add(deliveryModel)
+        })
     }
 }

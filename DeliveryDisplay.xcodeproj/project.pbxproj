@@ -30,9 +30,11 @@
 		0671E92F28843478003190D9 /* MyDeliveryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E92E28843478003190D9 /* MyDeliveryCoordinator.swift */; };
 		0671E931288439BC003190D9 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E930288439BC003190D9 /* AppCoordinator.swift */; };
 		0671E93828843DFF003190D9 /* DeliveryDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0671E93728843DFF003190D9 /* DeliveryDetailCoordinator.swift */; };
-		067BD5A8288595AF0039C086 /* DeliveryDisplay.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 067BD5A6288595AF0039C086 /* DeliveryDisplay.xcdatamodeld */; };
+		067BD5A8288595AF0039C086 /* DeliveryList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 067BD5A6288595AF0039C086 /* DeliveryList.xcdatamodeld */; };
 		067BD5AA2885975C0039C086 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067BD5A92885975C0039C086 /* CoreDataManager.swift */; };
 		06BB0FB62886F3DC0012CEF3 /* DeliveryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BB0FB52886F3DC0012CEF3 /* DeliveryList.swift */; };
+		06BB0FB92889B21C0012CEF3 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 06BB0FB82889B21C0012CEF3 /* Realm */; };
+		06BB0FBB2889B21C0012CEF3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 06BB0FBA2889B21C0012CEF3 /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06BB0FBB2889B21C0012CEF3 /* RealmSwift in Frameworks */,
+				06BB0FB92889B21C0012CEF3 /* Realm in Frameworks */,
 				0671E9232883CDB2003190D9 /* SDWebImageMapKit in Frameworks */,
 				0671E9212883CDB2003190D9 /* SDWebImage in Frameworks */,
 			);
@@ -144,7 +148,7 @@
 				065DD79528826C0800AFE5D8 /* Assets.xcassets */,
 				065DD79728826C0800AFE5D8 /* LaunchScreen.storyboard */,
 				065DD79A28826C0800AFE5D8 /* Info.plist */,
-				067BD5A6288595AF0039C086 /* DeliveryDisplay.xcdatamodeld */,
+				067BD5A6288595AF0039C086 /* DeliveryList.xcdatamodeld */,
 				067BD5A92885975C0039C086 /* CoreDataManager.swift */,
 			);
 			path = DeliveryDisplay;
@@ -307,6 +311,8 @@
 			packageProductDependencies = (
 				0671E9202883CDB2003190D9 /* SDWebImage */,
 				0671E9222883CDB2003190D9 /* SDWebImageMapKit */,
+				06BB0FB82889B21C0012CEF3 /* Realm */,
+				06BB0FBA2889B21C0012CEF3 /* RealmSwift */,
 			);
 			productName = DeliveryDisplay;
 			productReference = 065DD78628826C0600AFE5D8 /* DeliveryDisplay.app */;
@@ -382,6 +388,7 @@
 			mainGroup = 065DD77D28826C0600AFE5D8;
 			packageReferences = (
 				0671E91F2883CDB2003190D9 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				06BB0FB72889B21C0012CEF3 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 065DD78728826C0600AFE5D8 /* Products */;
 			projectDirPath = "";
@@ -442,7 +449,7 @@
 				0671E9142883AB60003190D9 /* MyDeliveryModel.swift in Sources */,
 				065DD7CA2882912D00AFE5D8 /* Constants.swift in Sources */,
 				065DD7C2288288F400AFE5D8 /* MyDeliveryViewModel.swift in Sources */,
-				067BD5A8288595AF0039C086 /* DeliveryDisplay.xcdatamodeld in Sources */,
+				067BD5A8288595AF0039C086 /* DeliveryList.xcdatamodeld in Sources */,
 				065DD78C28826C0600AFE5D8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -789,6 +796,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		06BB0FB72889B21C0012CEF3 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.28.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -802,16 +817,26 @@
 			package = 0671E91F2883CDB2003190D9 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
 		};
+		06BB0FB82889B21C0012CEF3 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06BB0FB72889B21C0012CEF3 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		06BB0FBA2889B21C0012CEF3 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06BB0FB72889B21C0012CEF3 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		067BD5A6288595AF0039C086 /* DeliveryDisplay.xcdatamodeld */ = {
+		067BD5A6288595AF0039C086 /* DeliveryList.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				067BD5A7288595AF0039C086 /* DeliveryDisplay.xcdatamodel */,
 			);
 			currentVersion = 067BD5A7288595AF0039C086 /* DeliveryDisplay.xcdatamodel */;
-			path = DeliveryDisplay.xcdatamodeld;
+			path = DeliveryList.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

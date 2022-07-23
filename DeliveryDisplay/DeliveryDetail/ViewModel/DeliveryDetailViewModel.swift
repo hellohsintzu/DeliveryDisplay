@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 protocol DeliveryDetailViewModelProtocol {
     var senderLabelTitle: String { get }
@@ -19,7 +20,6 @@ protocol DeliveryDetailViewModelProtocol {
 
 final class DeliveryDetailViewModel {
     private var deliveryDetail: MyDeliveryModel
-    private let moc = CoreDataManager.shared
     var didTapBackBtn: (() -> Void)?
     
     init(model: MyDeliveryModel) {
@@ -55,12 +55,24 @@ extension DeliveryDetailViewModel: DeliveryDetailViewModelProtocol {
     }
     
     func viewDidDisappear() {
-        moc.saveContext()
+        self.saveChangesToRealm()
         self.didTapBackBtn?()
     }
 }
 
 private extension DeliveryDetailViewModel {
+    func saveChangesToRealm() {
+        let localRealm = try? Realm()
+        let task = localRealm?.objects(MyDeliveryModelList.self)
+        if let taskWithID = task?.where({
+            $0.myDeliveryModelList.id == deliveryDetail.id
+        }) {
+            try? localRealm?.write({
+                taskWithID[0].myDeliveryModelList[0].isFavorite = deliveryDetail.isFavorite
+            })
+        }
+    }
+    
     func generateDeliveryFee() -> String {
         var deliveryFee = deliveryDetail.deliveryFee
         var surcharge = deliveryDetail.surcharge
