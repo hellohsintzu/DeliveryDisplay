@@ -29,16 +29,15 @@ final class MyDeliveryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupComponents()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         viewModel.loadData { [weak self] (isSuccess, error) in
             DispatchQueue.main.async {
                 isSuccess ? self?.tableView.reloadData() : self?.showAlert(message: error ?? "")
             }
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
     }
 }
 
@@ -65,17 +64,17 @@ extension MyDeliveryViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension MyDeliveryViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let position = scrollView.contentOffset.y
-        if position > (tableView.contentSize.height-100-scrollView.frame.size.height) {
-            self.tableView.tableFooterView = createSpinnerFooter()
-            viewModel.fetchDeliveryList(isPagination: true) { [weak self] (isSuccess, error) in
-                DispatchQueue.main.async {
-                    isSuccess ? self?.tableView.reloadData() : self?.showAlert(message: error ?? "")
-                }
-            }
-        }
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let position = scrollView.contentOffset.y
+//        if position > (tableView.contentSize.height-100-scrollView.frame.size.height) {
+//            self.tableView.tableFooterView = createSpinnerFooter()
+//            viewModel.fetchDeliveryList(isPagination: true) { [weak self] (isSuccess, error) in
+//                DispatchQueue.main.async {
+//                    isSuccess ? self?.tableView.reloadData() : self?.showAlert(message: error ?? "")
+//                }
+//            }
+//        }
+//    }
 }
 
 private extension MyDeliveryViewController {

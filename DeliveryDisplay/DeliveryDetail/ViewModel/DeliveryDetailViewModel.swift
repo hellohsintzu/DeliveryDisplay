@@ -15,6 +15,7 @@ protocol DeliveryDetailViewModelProtocol {
     var deliveryFeeString: String { get }
     var isFavorite: Bool { get set }
     
+    func viewWillDisappear()
     func viewDidDisappear()
 }
 
@@ -54,8 +55,11 @@ extension DeliveryDetailViewModel: DeliveryDetailViewModelProtocol {
         }
     }
     
-    func viewDidDisappear() {
+    func viewWillDisappear() {
         self.saveChangesToRealm()
+    }
+    
+    func viewDidDisappear() {
         self.didTapBackBtn?()
     }
 }

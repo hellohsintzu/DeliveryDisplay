@@ -130,6 +130,11 @@ final class DeliveryDetailViewController: UIViewController {
         setupFrames()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.viewWillDisappear()
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         viewModel.viewDidDisappear()

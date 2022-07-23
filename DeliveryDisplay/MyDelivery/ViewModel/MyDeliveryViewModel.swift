@@ -22,7 +22,6 @@ protocol MyDeliveryViewModelProtocol {
 final class MyDeliveryViewModel {
     private let service: MyDeliveryServiceProtocol
     private var deliveryList: [MyDeliveryModel?] = []
-    private var realmObject: Results<MyDeliveryModelList>? = nil
     private var currentPage: Int = 1
     var didSelect: ((_ model: MyDeliveryModel) -> Void)?
     
@@ -37,7 +36,6 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
     }
     
     func cellAt(_ indexPath: IndexPath) -> MyDeliveryModel {
-        self.fetchObjectFromRealm()
         let cModel = MyDeliveryModel(id: deliveryList[indexPath.row]?.id ?? "",
                                      senderTitle: deliveryList[indexPath.row]?.senderTitle ?? "",
                                      receiverTitle: deliveryList[indexPath.row]?.receiverTitle ?? "",
@@ -91,8 +89,8 @@ private extension MyDeliveryViewModel {
     
     func fetchObjectFromRealm() {
         let localRealm: Realm? = try? Realm()
-        self.realmObject = localRealm?.objects(MyDeliveryModelList.self)
-        if let object = self.realmObject?.first {
+        let realmObject = localRealm?.objects(MyDeliveryModelList.self)
+        if let object = realmObject?.first {
             for model in object.myDeliveryModelList {
                 self.deliveryList.append(model.convertToMyDeliveryModel())
             }
