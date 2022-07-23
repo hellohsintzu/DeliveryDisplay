@@ -22,15 +22,15 @@ final class MyDeliveryCoordinator : Coordinator {
         let viewModel = MyDeliveryViewModel(service: service)
         let viewController = MyDeliveryViewController(viewModel: viewModel)
         
-        viewModel.didSelect = { [weak self] model in
+        viewModel.didSelect = { [weak self] (model, selectedIndexPath) in
             guard let self = self else { return }
-            self.navigateToDeliveryDetailVC(model)
+            self.navigateToDeliveryDetailVC(model, selectedIndexPath: selectedIndexPath)
         }
         navigationController.setViewControllers([viewController], animated: true)
     }
 
-    func navigateToDeliveryDetailVC(_ model: MyDeliveryModel) {
-        let coordinator = DeliveryDetailCoordinator(model: model, nav: self.navigationController)
+    func navigateToDeliveryDetailVC(_ model: MyDeliveryModel, selectedIndexPath: IndexPath) {
+        let coordinator = DeliveryDetailCoordinator(model: model, nav: self.navigationController, selectedIndexPath: selectedIndexPath)
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
         coordinator.start()

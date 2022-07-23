@@ -23,7 +23,8 @@ final class MyDeliveryViewModel {
     private let service: MyDeliveryServiceProtocol
     private var deliveryList: [MyDeliveryModel?] = []
     private var currentPage: Int = 1
-    var didSelect: ((_ model: MyDeliveryModel) -> Void)?
+    private var selectedIndexPath: IndexPath?
+    var didSelect: ((_ model: MyDeliveryModel, _ selectedIndexPath: IndexPath) -> Void)?
     
     init(service: MyDeliveryServiceProtocol) {
         self.service = service
@@ -47,12 +48,18 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
     }
     
     func didSelectCell(at indexPath: IndexPath) {
-        self.didSelect?(cellAt(indexPath))
+        self.selectedIndexPath = indexPath
+        self.didSelect?(cellAt(indexPath), indexPath)
     }
     
     func loadData(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void) {
-        self.fetchObjectFromRealm()
-        self.deliveryList.isEmpty ?  fetchDeliveryList(isPagination: false, completionHandler: completionHandler) : completionHandler(true, nil)
+        if self.deliveryList.isEmpty {
+            self.fetchObjectFromRealm()
+        } else {
+            self.updateDeliveryList()
+            completionHandler(true, nil)
+        }
+        self.deliveryList.isEmpty ? self.fetchDeliveryList(isPagination: true, completionHandler: completionHandler) : completionHandler(true, nil)
     }
     
     func fetchDeliveryList(isPagination: Bool, completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void) {
@@ -94,6 +101,17 @@ private extension MyDeliveryViewModel {
             for model in object.myDeliveryModelList {
                 self.deliveryList.append(model.convertToMyDeliveryModel())
             }
+        }
+    }
+    
+    func updateDeliveryList() {
+        guard let indexPath = self.selectedIndexPath else { return }
+        let localRealm = try? Realm()
+        let task = localRealm?.objects(MyDeliveryModelList.self)
+        if let taskWithID = task?.where({
+            $0.myDeliveryModelList.id == self.deliveryList[indexPath.row]?.id
+        }) {
+            self.deliveryList[indexPath.row] = taskWithID[0].myDeliveryModelList[indexPath.row].convertToMyDeliveryModel()
         }
     }
     

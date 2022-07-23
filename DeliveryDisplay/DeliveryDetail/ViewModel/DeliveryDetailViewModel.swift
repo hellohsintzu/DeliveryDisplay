@@ -21,10 +21,12 @@ protocol DeliveryDetailViewModelProtocol {
 
 final class DeliveryDetailViewModel {
     private var deliveryDetail: MyDeliveryModel
+    private var selectedIndexPath: IndexPath
     var didTapBackBtn: (() -> Void)?
     
-    init(model: MyDeliveryModel) {
-        deliveryDetail = model
+    init(model: MyDeliveryModel, selectedIndexPath: IndexPath) {
+        self.deliveryDetail = model
+        self.selectedIndexPath = selectedIndexPath
     }
 }
 
@@ -72,7 +74,7 @@ private extension DeliveryDetailViewModel {
             $0.myDeliveryModelList.id == deliveryDetail.id
         }) {
             try? localRealm?.write({
-                taskWithID[0].myDeliveryModelList[0].isFavorite = deliveryDetail.isFavorite
+                taskWithID[0].myDeliveryModelList[selectedIndexPath.row].isFavorite = deliveryDetail.isFavorite
             })
         }
     }

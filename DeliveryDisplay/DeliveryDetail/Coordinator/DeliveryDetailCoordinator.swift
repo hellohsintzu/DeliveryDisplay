@@ -12,14 +12,16 @@ final class DeliveryDetailCoordinator: Coordinator {
     var parentCoordinator: MyDeliveryCoordinator?
     private let navigationController: UINavigationController
     private let model: MyDeliveryModel
+    private let selectedIndexPath: IndexPath
     
-    init(model: MyDeliveryModel, nav :UINavigationController) {
+    init(model: MyDeliveryModel, nav :UINavigationController, selectedIndexPath: IndexPath) {
         self.model = model
         self.navigationController = nav
+        self.selectedIndexPath = selectedIndexPath
     }
     
     func start() {
-        let viewModel = DeliveryDetailViewModel(model: model)
+        let viewModel = DeliveryDetailViewModel(model: model, selectedIndexPath: selectedIndexPath)
         let viewController = DeliveryDetailViewController(viewModel: viewModel)
         viewController.title = Constants.DeliveryDetail.deliveryDetailsTitle
         viewModel.didTapBackBtn = { [weak self] in
