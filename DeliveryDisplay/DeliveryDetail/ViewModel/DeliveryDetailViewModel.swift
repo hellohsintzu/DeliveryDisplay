@@ -70,13 +70,9 @@ private extension DeliveryDetailViewModel {
     func saveChangesToRealm() {
         let localRealm = try? Realm()
         let task = localRealm?.objects(MyDeliveryModelList.self)
-        if let taskWithID = task?.where({
-            $0.myDeliveryModelList.id == deliveryDetail.id
-        }) {
-            try? localRealm?.write({
-                taskWithID[0].myDeliveryModelList[selectedIndexPath.row].isFavorite = deliveryDetail.isFavorite
-            })
-        }
+        try? localRealm?.write({
+            task?[0].myDeliveryModelList[selectedIndexPath.row].isFavorite = deliveryDetail.isFavorite
+        })
     }
     
     func generateDeliveryFee() -> String {

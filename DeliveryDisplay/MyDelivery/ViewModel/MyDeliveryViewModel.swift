@@ -81,6 +81,7 @@ private extension MyDeliveryViewModel {
                 self?.saveDeliveryDetailsToVM(data)
                 self?.saveResponseToRealm(data)
                 completionHandler(true, nil)
+                print("fetchDeliveryList\(self?.displayDeliveryList)")
             case .failure(let error):
                 completionHandler(false, error.localizedDescription)
             }
@@ -104,10 +105,12 @@ private extension MyDeliveryViewModel {
         let localRealm: Realm? = try? Realm()
         let realmObject = localRealm?.objects(MyDeliveryModelList.self)
         if let object = realmObject?.first {
-            for model in object.myDeliveryModelList {
+            let list = object.myDeliveryModelList
+            for model in list {
                 self.displayDeliveryList.append(model.convertToMyDeliveryModel())
             }
         }
+        print("fetchObjectFromRealm\(self.displayDeliveryList)")
     }
     
     func updateDeliveryList() {
@@ -115,11 +118,7 @@ private extension MyDeliveryViewModel {
         guard let indexPath = self.selectedIndexPath else { return }
         let localRealm = try? Realm()
         let task = localRealm?.objects(MyDeliveryModelList.self)
-        if let taskWithID = task?.where({
-            $0.myDeliveryModelList.id == self.displayDeliveryList[indexPath.row]?.id
-        }) {
-            self.displayDeliveryList[indexPath.row] = taskWithID[0].myDeliveryModelList[currentPage-1].convertToMyDeliveryModel()
-        }
+        self.displayDeliveryList[indexPath.row] = task?[0].myDeliveryModelList[indexPath.row].convertToMyDeliveryModel()
     }
     
     func saveResponseToRealm(_ data: [DeliveryDetails]) {
