@@ -16,14 +16,16 @@ protocol MyDeliveryViewModelProtocol {
     
     // API call
     func loadData(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void)
-    func fetchDeliveryList(isPagination: Bool, completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void)
+    func prepareNextPage(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void)
 }
 
 final class MyDeliveryViewModel {
     private let service: MyDeliveryServiceProtocol
-    private var deliveryList: [MyDeliveryModel?] = []
-    private var currentPage: Int = 1
+    private var displayDeliveryList: [MyDeliveryModel?] = []
     private var selectedIndexPath: IndexPath?
+    private var currentPage: Int = 1
+    private var maximumItems: Int = 5
+    private var maximumPages: Int = 5
     var didSelect: ((_ model: MyDeliveryModel, _ selectedIndexPath: IndexPath) -> Void)?
     
     init(service: MyDeliveryServiceProtocol) {
@@ -33,17 +35,17 @@ final class MyDeliveryViewModel {
 
 extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
     var numberOfRows: Int {
-        return self.deliveryList.count
+        return self.displayDeliveryList.count
     }
     
     func cellAt(_ indexPath: IndexPath) -> MyDeliveryModel {
-        let cModel = MyDeliveryModel(id: deliveryList[indexPath.row]?.id ?? "",
-                                     senderTitle: deliveryList[indexPath.row]?.senderTitle ?? "",
-                                     receiverTitle: deliveryList[indexPath.row]?.receiverTitle ?? "",
-                                     deliveryFee: deliveryList[indexPath.row]?.deliveryFee ?? "",
-                                     surcharge: deliveryList[indexPath.row]?.surcharge ?? "",
-                                     imageURLString: deliveryList[indexPath.row]?.imageURLString ?? "",
-                                     isFavorite: deliveryList[indexPath.row]?.isFavorite ?? false)
+        let cModel = MyDeliveryModel(id: displayDeliveryList[indexPath.row]?.id ?? "",
+                                     senderTitle: displayDeliveryList[indexPath.row]?.senderTitle ?? "",
+                                     receiverTitle: displayDeliveryList[indexPath.row]?.receiverTitle ?? "",
+                                     deliveryFee: displayDeliveryList[indexPath.row]?.deliveryFee ?? "",
+                                     surcharge: displayDeliveryList[indexPath.row]?.surcharge ?? "",
+                                     imageURLString: displayDeliveryList[indexPath.row]?.imageURLString ?? "",
+                                     isFavorite: displayDeliveryList[indexPath.row]?.isFavorite ?? false)
         return cModel
     }
     
@@ -53,34 +55,39 @@ extension MyDeliveryViewModel: MyDeliveryViewModelProtocol {
     }
     
     func loadData(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void) {
-        if self.deliveryList.isEmpty {
+        if self.displayDeliveryList.isEmpty {
             self.fetchObjectFromRealm()
         } else {
             self.updateDeliveryList()
             completionHandler(true, nil)
         }
-        self.deliveryList.isEmpty ? self.fetchDeliveryList(isPagination: true, completionHandler: completionHandler) : completionHandler(true, nil)
+        self.displayDeliveryList.isEmpty ? self.fetchDeliveryList(completionHandler: completionHandler) : completionHandler(true, nil)
     }
     
-    func fetchDeliveryList(isPagination: Bool, completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void) {
-        guard !service.isPaginating, self.currentPage <= 5 else { return }
-        service.fetchListOfDeliveries(isPagination: isPagination) { [weak self] result in
+    func prepareNextPage(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void) {
+        guard self.currentPage < maximumPages else { return }
+        self.currentPage += 1
+        if displayDeliveryList.count < currentPage*maximumItems {
+            self.fetchDeliveryList(completionHandler: completionHandler)
+        }
+    }
+}
+
+private extension MyDeliveryViewModel {
+    func fetchDeliveryList(completionHandler: @escaping (_ isSuccess: Bool, _ error: String?) -> Void) {
+        service.fetchListOfDeliveries { [weak self] result in
             switch result {
             case .success(let data):
-                self?.deliveryList = self?.convertDeliveryDetailsToModel(data) ?? []
+                self?.saveDeliveryDetailsToVM(data)
                 self?.saveResponseToRealm(data)
-                self?.currentPage += 1
                 completionHandler(true, nil)
             case .failure(let error):
                 completionHandler(false, error.localizedDescription)
             }
         }
     }
-}
-
-private extension MyDeliveryViewModel {
-    func convertDeliveryDetailsToModel(_ details: [DeliveryDetails]) -> [MyDeliveryModel] {
-        var modelArr: [MyDeliveryModel] = []
+    
+    func saveDeliveryDetailsToVM(_ details: [DeliveryDetails]) {
         for detail in details {
             let model = MyDeliveryModel(id: detail.id ?? "",
                                         senderTitle: detail.route?.start ?? "",
@@ -89,9 +96,8 @@ private extension MyDeliveryViewModel {
                                         surcharge: detail.surcharge ?? "",
                                         imageURLString: detail.goodsPicture ?? "",
                                         isFavorite: false)
-            modelArr.append(model)
+            self.displayDeliveryList.append(model)
         }
-        return modelArr
     }
     
     func fetchObjectFromRealm() {
@@ -99,38 +105,59 @@ private extension MyDeliveryViewModel {
         let realmObject = localRealm?.objects(MyDeliveryModelList.self)
         if let object = realmObject?.first {
             for model in object.myDeliveryModelList {
-                self.deliveryList.append(model.convertToMyDeliveryModel())
+                self.displayDeliveryList.append(model.convertToMyDeliveryModel())
             }
         }
     }
     
     func updateDeliveryList() {
+        print("self.displayDeliveryList\(self.displayDeliveryList)")
         guard let indexPath = self.selectedIndexPath else { return }
         let localRealm = try? Realm()
         let task = localRealm?.objects(MyDeliveryModelList.self)
         if let taskWithID = task?.where({
-            $0.myDeliveryModelList.id == self.deliveryList[indexPath.row]?.id
+            $0.myDeliveryModelList.id == self.displayDeliveryList[indexPath.row]?.id
         }) {
-            self.deliveryList[indexPath.row] = taskWithID[0].myDeliveryModelList[indexPath.row].convertToMyDeliveryModel()
+            self.displayDeliveryList[indexPath.row] = taskWithID[0].myDeliveryModelList[currentPage-1].convertToMyDeliveryModel()
         }
     }
     
     func saveResponseToRealm(_ data: [DeliveryDetails]) {
         let localRealm: Realm? = try? Realm()
-        let object = List<DeliveryList>()
-        for detail in data {
-            let model = DeliveryList(id: detail.id ?? "",
-                                     start: detail.route?.start ?? "",
-                                     end: detail.route?.end ?? "",
-                                     deliveryFee: detail.deliveryFee ?? "",
-                                     surcharge: detail.surcharge ?? "",
-                                     goodsPicture: detail.goodsPicture ?? "",
-                                     isFavorite: false)
-            object.append(model)
+        let realmObject = localRealm?.objects(MyDeliveryModelList.self)
+        if let object = realmObject?.first {
+            try? localRealm?.write({
+                let list = object.myDeliveryModelList
+                for detail in data {
+                    let model = DeliveryList(id: detail.id ?? "",
+                                             start: detail.route?.start ?? "",
+                                             end: detail.route?.end ?? "",
+                                             deliveryFee: detail.deliveryFee ?? "",
+                                             surcharge: detail.surcharge ?? "",
+                                             goodsPicture: detail.goodsPicture ?? "",
+                                             isFavorite: false)
+                    list.append(model)
+                }
+                object.myDeliveryModelList = list
+                print(" object.myDeliveryModelList \(object.myDeliveryModelList)")
+            })
+        } else {
+            let object = List<DeliveryList>()
+            for detail in data {
+                let model = DeliveryList(id: detail.id ?? "",
+                                         start: detail.route?.start ?? "",
+                                         end: detail.route?.end ?? "",
+                                         deliveryFee: detail.deliveryFee ?? "",
+                                         surcharge: detail.surcharge ?? "",
+                                         goodsPicture: detail.goodsPicture ?? "",
+                                         isFavorite: false)
+                object.append(model)
+            }
+            let deliveryModel = MyDeliveryModelList(myDeliveryModelList: object)
+            try? localRealm?.write({
+                localRealm?.add(deliveryModel)
+            })
+            print("deliveryModel \(deliveryModel)")
         }
-        let deliveryModel = MyDeliveryModelList(myDeliveryModelList: object)
-        try? localRealm?.write({
-            localRealm?.add(deliveryModel)
-        })
     }
 }
