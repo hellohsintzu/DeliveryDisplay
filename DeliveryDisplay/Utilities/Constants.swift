@@ -13,6 +13,7 @@ struct Constants {
         static let endpoint = "/deliveries"
         static let offset = "offset"
         static let limit = "limit"
+        static let get = "GET"
     }
     
     struct MyDelivery {
@@ -29,5 +30,10 @@ struct Constants {
         static let favBtnTitle = "Add to Favorite"
         static let goodsTitle = "Goods to deliver"
         static let feeTitle = "Delivery Fee"
+    }
+    
+    struct UIImageSystemNames {
+        static let heartFill = "heart.fill"
+        static let heart = "heart"
     }
 }

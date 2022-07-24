@@ -144,7 +144,7 @@ final class DeliveryDetailViewController: UIViewController {
 private extension DeliveryDetailViewController {
     @objc func favButtonDidTap() {
         viewModel.isFavorite = !viewModel.isFavorite
-        let favImage = viewModel.isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+        let favImage = viewModel.isFavorite ? UIImage(systemName: Constants.UIImageSystemNames.heartFill) : UIImage(systemName: Constants.UIImageSystemNames.heart)
         favButton.setImage(favImage, for: .normal)
         favButton.imageView?.tintColor = .white
     }
@@ -154,7 +154,7 @@ private extension DeliveryDetailViewController {
         receiverLabel.text = viewModel.receiverLabelTitle
         goodsImageView.sd_setImage(with: URL(string: viewModel.imageURLString))
         feeLabel.text = viewModel.deliveryFeeString
-        let favImage = viewModel.isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+        let favImage = viewModel.isFavorite ? UIImage(systemName: Constants.UIImageSystemNames.heartFill) : UIImage(systemName: Constants.UIImageSystemNames.heart)
         favButton.setImage(favImage, for: .normal)
     }
     

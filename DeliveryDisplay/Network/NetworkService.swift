@@ -20,6 +20,7 @@ protocol NetworkServiceProtocol {
 }
 
 final class NetworkService: NetworkServiceProtocol {
+    let successHttpCode: Int = 200
     func request<T: Decodable>(urlString: String, model: T.Type, completionHandler: @escaping (Result<T, ErrorModel>) -> Void) {
         guard let url = URL(string: urlString) else {
             completionHandler(.failure(.invalidURL))
@@ -27,15 +28,15 @@ final class NetworkService: NetworkServiceProtocol {
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = "GET"
+        request.httpMethod = Constants.APIConstants.get
         
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             if let error = error {
                 completionHandler(.failure(.requestFail(error)))
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 200 else {
+                  httpResponse.statusCode == self?.successHttpCode else {
                       completionHandler(.failure(.invalidResponse))
                       return
                   }
